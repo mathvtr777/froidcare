@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { LifeBuoy, Database } from 'lucide-react';
 import { Badge } from '../ui/Badge';
+import { Database } from 'lucide-react';
 
 export interface HeaderProps {
   onOpenHelp: () => void;
@@ -13,52 +13,49 @@ export const Header: React.FC<HeaderProps> = ({ onOpenHelp }) => {
   const initial = displayName.charAt(0).toUpperCase();
 
   return (
-    <header className="h-16 border-b border-charcoal-800 bg-charcoal-900/60 backdrop-blur-md px-4 md:px-6 flex items-center justify-between z-20 shrink-0">
-      <div className="flex items-center gap-3">
-        {/* Mobile brand indicator */}
-        <div className="md:hidden flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-sage-950 border border-sage-800 flex items-center justify-center">
-            <span className="text-sage-400 font-bold text-sm">F</span>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-surface/85 backdrop-blur-xl border-b border-surface-container-high/60 pt-safe">
+      <div className="h-16 px-margin flex items-center justify-between gap-space-sm max-w-6xl mx-auto w-full">
+        {/* Brand */}
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-xl bg-primary/15 border border-primary/30 flex items-center justify-center text-primary font-bold text-sm shadow-sm">
+            F
           </div>
-          <span className="font-semibold text-neutral-100 text-sm">Froid Care</span>
+          <span className="font-headline-sm text-headline-sm text-on-surface tracking-tight font-semibold">
+            Froid Care
+          </span>
+
+          {isDemoMode && (
+            <Badge
+              variant="tertiary"
+              className="hidden sm:inline-flex items-center gap-1.5 py-0.5 px-2 text-[10px] ml-2"
+              title="Supabase não configurado. Dados salvos localmente no navegador."
+            >
+              <Database className="w-3 h-3 text-tertiary" />
+              <span>Modo Local</span>
+            </Badge>
+          )}
         </div>
 
-        {isDemoMode && (
-          <Badge
-            variant="subtle"
-            className="hidden sm:inline-flex items-center gap-1.5 py-1 px-2.5 text-[11px] text-amber-300 bg-amber-950/40 border border-amber-900/50"
-            title="Supabase não configurado no .env. Dados persistidos localmente no navegador."
+        {/* Actions: SOS Pill + Profile */}
+        <div className="flex items-center gap-space-sm">
+          <button
+            type="button"
+            onClick={onOpenHelp}
+            aria-label="Ajuda SOS"
+            className="min-h-[40px] px-3.5 py-1.5 rounded-full bg-tertiary-container/15 text-tertiary hover:bg-tertiary-container/25 active:scale-95 transition-all flex items-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-tertiary/40 border border-tertiary/20"
           >
-            <Database className="w-3 h-3 text-amber-400" />
-            <span>Modo Local / Demo</span>
-          </Badge>
-        )}
-      </div>
+            <span className="material-symbols-outlined text-[18px] text-tertiary">emergency</span>
+            <span className="font-label-sm text-label-sm uppercase tracking-wider font-semibold text-tertiary">
+              SOS
+            </span>
+          </button>
 
-      <div className="flex items-center gap-3">
-        {/* Urgent Help button */}
-        <button
-          type="button"
-          onClick={onOpenHelp}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium text-amber-300 hover:text-amber-200 bg-amber-950/30 hover:bg-amber-950/60 border border-amber-900/40 transition-colors"
-          aria-label="Contatos de emergência e apoio imediato"
-        >
-          <LifeBuoy className="w-3.5 h-3.5 text-amber-400" />
-          <span className="hidden sm:inline">Ajuda Imediata</span>
-          <span className="sm:hidden">Ajuda</span>
-        </button>
-
-        {/* User initials pill */}
-        <div className="flex items-center gap-2 pl-2 border-l border-charcoal-800">
           <div
-            className="w-8 h-8 rounded-full bg-charcoal-800 border border-charcoal-700 flex items-center justify-center text-xs font-semibold text-neutral-200 select-none"
+            className="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant/60 flex items-center justify-center text-xs font-bold text-on-surface select-none shadow-sm"
             title={`Conectado como ${displayName}`}
           >
             {initial}
           </div>
-          <span className="hidden lg:inline text-xs font-medium text-neutral-300 truncate max-w-[120px]">
-            {displayName}
-          </span>
         </div>
       </div>
     </header>

@@ -36,28 +36,31 @@ export const ForgotPasswordPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center p-4 bg-charcoal-950">
+    <div className="min-h-screen w-full flex items-center justify-center p-4 bg-surface text-on-surface">
       <div className="w-full max-w-md space-y-6">
         <div className="text-center space-y-2">
-          <h1 className="text-2xl font-bold tracking-tight text-neutral-100">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 text-primary mb-2 shadow-[0_0_16px_rgba(90,240,179,0.2)]">
+            <span className="material-symbols-outlined text-2xl">lock_reset</span>
+          </div>
+          <h1 className="text-2xl font-bold tracking-tight text-on-surface">
             Recuperação de Senha
           </h1>
-          <p className="text-sm text-neutral-400">
+          <p className="text-sm text-on-surface-variant">
             Enviaremos um link de redefinição para o seu e-mail.
           </p>
         </div>
 
-        <div className="rounded-2xl bg-charcoal-900 border border-charcoal-800 p-6 md:p-8 shadow-xl space-y-5">
+        <div className="rounded-3xl bg-surface-container-low border border-outline-variant/60 p-6 md:p-8 shadow-2xl space-y-5">
           {sent ? (
             <div className="space-y-4 text-center py-3">
-              <div className="inline-flex p-3 rounded-full bg-sage-950 text-sage-400 border border-sage-800/80">
+              <div className="inline-flex p-3 rounded-full bg-primary/15 text-primary border border-primary/30">
                 <CheckCircle2 className="w-6 h-6" />
               </div>
-              <h3 className="text-base font-semibold text-neutral-100">
+              <h3 className="text-base font-semibold text-on-surface">
                 Verifique sua caixa de entrada
               </h3>
-              <p className="text-xs text-neutral-300 leading-relaxed">
-                Se existir uma conta associada a <strong className="text-sage-300">{email}</strong>,
+              <p className="text-xs text-on-surface-variant leading-relaxed">
+                Se existir uma conta associada a <strong className="text-primary">{email}</strong>,
                 você receberá um e-mail com instruções seguras para criar uma nova senha.
               </p>
               <div className="pt-2">
@@ -71,7 +74,7 @@ export const ForgotPasswordPage: React.FC = () => {
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               {error && (
-                <div className="p-3 rounded-xl bg-rose-950/40 border border-rose-900/60 text-xs text-rose-300">
+                <div className="p-3.5 rounded-2xl bg-error/15 border border-error/30 text-xs text-error">
                   {error}
                 </div>
               )}
@@ -91,10 +94,10 @@ export const ForgotPasswordPage: React.FC = () => {
             </form>
           )}
 
-          <div className="pt-2 border-t border-charcoal-800 text-center">
+          <div className="pt-2 border-t border-outline-variant/40 text-center">
             <Link
               to="/login"
-              className="inline-flex items-center gap-1.5 text-xs text-neutral-400 hover:text-neutral-200"
+              className="inline-flex items-center gap-1.5 text-xs text-on-surface-variant hover:text-on-surface transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               Voltar ao login

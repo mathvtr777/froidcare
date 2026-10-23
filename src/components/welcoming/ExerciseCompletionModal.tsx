@@ -63,10 +63,10 @@ export const ExerciseCompletionModal: React.FC<ExerciseCompletionModalProps> = (
       description={`Você finalizou: ${activityName}`}
       maxWidth="md"
     >
-      <div className="space-y-5 text-sm">
+      <div className="space-y-5 text-sm text-on-surface">
         {!hasCompared ? (
           <>
-            <p className="text-xs text-neutral-300 leading-relaxed">
+            <p className="text-xs text-on-surface-variant leading-relaxed">
               Como você está se percebendo após esta prática? Se desejar, registre a intensidade atual.
               Este passo é opcional e serve apenas para acompanhar suas percepções.
             </p>
@@ -77,29 +77,29 @@ export const ExerciseCompletionModal: React.FC<ExerciseCompletionModalProps> = (
               label="Intensidade percebida agora (0 a 10)"
             />
 
-            <div className="pt-3 flex items-center justify-between border-t border-charcoal-800">
+            <div className="pt-3 flex items-center justify-between border-t border-outline-variant/40">
               <Button variant="ghost" size="sm" onClick={onClose}>
                 Pular registro
               </Button>
-              <Button size="sm" onClick={handleSavePostIntensity} isLoading={saving}>
+              <Button size="sm" onClick={handleSavePostIntensity} isLoading={saving} className="px-5">
                 Salvar percepção
               </Button>
             </div>
           </>
         ) : (
           <>
-            <div className="p-4 rounded-xl bg-charcoal-850 border border-charcoal-750 space-y-2">
-              <div className="flex items-center gap-2 text-sage-400 font-semibold text-xs uppercase tracking-wider">
+            <div className="p-4 rounded-2xl bg-surface-container border border-outline-variant/50 space-y-2">
+              <div className="flex items-center gap-2 text-primary font-semibold text-xs uppercase tracking-wider">
                 <Sparkles className="w-4 h-4" />
                 <span>Observação descritiva</span>
               </div>
-              <p className="text-xs text-neutral-300 leading-relaxed">
+              <p className="text-xs text-on-surface-variant leading-relaxed">
                 {getDescriptiveComparison() || 'Sua percepção foi registrada com sucesso.'}
               </p>
             </div>
 
             <div className="pt-2 flex justify-end">
-              <Button size="sm" onClick={onClose}>
+              <Button size="sm" onClick={onClose} className="px-5">
                 Fechar e voltar
               </Button>
             </div>

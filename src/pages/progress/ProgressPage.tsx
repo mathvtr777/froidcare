@@ -5,18 +5,6 @@ import { useAuth } from '../../contexts/AuthContext';
 import { EMOTIONS } from '../../constants';
 import { formatShortDatePt, formatDayWeekdayPt } from '../../lib/utils';
 import {
-  ResponsiveContainer,
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  CartesianGrid,
-  BarChart,
-  Bar,
-  Cell,
-} from 'recharts';
-import {
   Calendar,
   Table as TableIcon,
   ChevronDown,
@@ -62,288 +50,309 @@ export const ProgressPage: React.FC = () => {
     loadData();
   }, [loadData]);
 
-  // Derive charts data strictly from real records
+  // Derived metrics from real user records
   const totalRecords = records.length;
   const avgIntensity =
     totalRecords > 0
       ? (records.reduce((acc, r) => acc + r.intensity, 0) / totalRecords).toFixed(1)
       : '0.0';
 
-  // Distribution
   const emotionCountMap: Record<string, number> = {};
   records.forEach((r) => {
     emotionCountMap[r.primary_emotion] = (emotionCountMap[r.primary_emotion] || 0) + 1;
   });
 
-  const emotionChartData = Object.entries(emotionCountMap).map(([id, count]) => {
-    const def = EMOTIONS.find((e) => e.id === id);
-    return {
-      id,
-      name: def ? def.label : id,
-      count,
-      color: def ? def.accentColor : '#528E75',
-    };
-  }).sort((a, b) => b.count - a.count);
+  const emotionChartData = Object.entries(emotionCountMap)
+    .map(([id, count]) => {
+      const def = EMOTIONS.find((e) => e.id === id);
+      return {
+        id,
+        name: def ? def.label : id,
+        count,
+        color: def ? def.accentColor : '#5af0b3',
+      };
+    })
+    .sort((a, b) => b.count - a.count);
 
   const topEmotion = emotionChartData.length > 0 ? emotionChartData[0] : null;
+  const topEmotionPercent = topEmotion && totalRecords > 0 ? Math.round((topEmotion.count / totalRecords) * 100) : 0;
 
-  // Timeline data: chronologically sorted
-  const timelineData = [...records]
-    .sort((a, b) => new Date(a.record_timestamp).getTime() - new Date(b.record_timestamp).getTime())
-    .map((r) => ({
-      date: formatDayWeekdayPt(r.record_timestamp),
-      intensity: r.intensity,
-      emotion: (EMOTIONS.find((e) => e.id === r.primary_emotion)?.label) || r.primary_emotion,
-      timestamp: r.record_timestamp,
-    }));
+  // Activities completed count
+  const activitiesCompletedCount = records.filter((r) => Boolean(r.activity_used)).length;
+
+  // Chronologically sorted timeline points
+  const timelineRecords = [...records].sort(
+    (a, b) => new Date(a.record_timestamp).getTime() - new Date(b.record_timestamp).getTime()
+  );
 
   return (
-    <div className="space-y-6">
-      {/* Header & Filter Controls */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight text-neutral-100">
+    <div className="flex flex-col w-full pb-8 space-y-space-md">
+      {/* 1. Header Section */}
+      <section className="flex flex-col space-y-1 pt-1">
+        <div className="flex items-center gap-2">
+          <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary">
+            <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>
+              insights
+            </span>
+          </span>
+          <h2 className="font-headline-md text-headline-md text-on-surface tracking-tight font-bold">
             Meu Progresso
-          </h1>
-          <p className="text-sm text-neutral-400">
-            Acompanhe a distribuição e as variações das suas emoções com base em dados reais.
-          </p>
+          </h2>
         </div>
+        <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          Acompanhe a distribuição e as variações das suas emoções com base em dados reais.
+        </p>
+      </section>
 
-        {/* Period Selector Tabs */}
-        <div className="flex items-center gap-1.5 p-1 rounded-xl bg-charcoal-900 border border-charcoal-800 self-start sm:self-auto">
-          <button
-            type="button"
-            onClick={() => setPeriodPreset('7d')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-              periodPreset === '7d'
-                ? 'bg-sage-950 text-sage-300 border border-sage-800/80 font-semibold'
-                : 'text-neutral-400 hover:text-neutral-200'
-            }`}
-          >
-            Últimos 7 dias
-          </button>
-          <button
-            type="button"
-            onClick={() => setPeriodPreset('30d')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-              periodPreset === '30d'
-                ? 'bg-sage-950 text-sage-300 border border-sage-800/80 font-semibold'
-                : 'text-neutral-400 hover:text-neutral-200'
-            }`}
-          >
-            Últimos 30 dias
-          </button>
-          <button
-            type="button"
-            onClick={() => setPeriodPreset('all')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-              periodPreset === 'all'
-                ? 'bg-sage-950 text-sage-300 border border-sage-800/80 font-semibold'
-                : 'text-neutral-400 hover:text-neutral-200'
-            }`}
-          >
-            Todo o histórico
-          </button>
-        </div>
+      {/* 2. Segmented Time Period Selector */}
+      <div className="w-full bg-surface-container-lowest/80 p-1 rounded-full flex items-center justify-between shadow-inner border border-outline-variant/30">
+        <button
+          type="button"
+          onClick={() => setPeriodPreset('7d')}
+          className={`flex-1 py-1.5 px-3 rounded-full font-label-md text-label-md transition-all duration-300 text-center font-semibold ${
+            periodPreset === '7d'
+              ? 'text-on-primary bg-primary shadow-sm'
+              : 'text-on-surface-variant hover:text-on-surface'
+          }`}
+        >
+          7 dias
+        </button>
+        <button
+          type="button"
+          onClick={() => setPeriodPreset('30d')}
+          className={`flex-1 py-1.5 px-3 rounded-full font-label-md text-label-md transition-all duration-300 text-center font-semibold ${
+            periodPreset === '30d'
+              ? 'text-on-primary bg-primary shadow-sm'
+              : 'text-on-surface-variant hover:text-on-surface'
+          }`}
+        >
+          30 dias
+        </button>
+        <button
+          type="button"
+          onClick={() => setPeriodPreset('all')}
+          className={`flex-1 py-1.5 px-3 rounded-full font-label-md text-label-md transition-all duration-300 text-center font-semibold ${
+            periodPreset === 'all'
+              ? 'text-on-primary bg-primary shadow-sm'
+              : 'text-on-surface-variant hover:text-on-surface'
+          }`}
+        >
+          Todo o histórico
+        </button>
       </div>
 
       {loading ? (
-        <div className="py-16 text-center text-sm text-neutral-400">
+        <div className="py-16 text-center text-sm text-on-surface-variant">
           Calculando resumo a partir dos seus registros...
         </div>
       ) : totalRecords === 0 ? (
         /* Empty State */
-        <div className="p-8 rounded-2xl bg-charcoal-900 border border-charcoal-800 text-center space-y-3">
-          <div className="w-10 h-10 rounded-full bg-charcoal-850 text-neutral-400 mx-auto flex items-center justify-center border border-charcoal-750">
-            <Calendar className="w-5 h-5" />
+        <div className="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/40 text-center space-y-3">
+          <div className="w-10 h-10 rounded-full bg-surface-container text-on-surface-variant mx-auto flex items-center justify-center border border-outline-variant/40">
+            <Calendar className="w-5 h-5 text-primary" />
           </div>
-          <h3 className="text-base font-semibold text-neutral-200">
+          <h3 className="text-base font-semibold text-on-surface">
             Ainda não há registros suficientes neste período
           </h3>
-          <p className="text-xs text-neutral-400 max-w-md mx-auto leading-relaxed">
+          <p className="text-xs text-on-surface-variant max-w-md mx-auto leading-relaxed">
             Para apresentar gráficos e resumos significativos, precisamos de registros reais.
             Faça check-ins regulares ao longo da semana para começar a visualizar seus padrões.
           </p>
         </div>
       ) : (
         <>
-          {/* Summary Metric Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div className="p-4 rounded-2xl bg-charcoal-900 border border-charcoal-800 space-y-1">
-              <span className="text-[11px] font-medium text-neutral-400 uppercase tracking-wider">
-                Total de Registros
-              </span>
-              <div className="text-2xl font-bold text-neutral-100">
-                {totalRecords}
-              </div>
-              <span className="text-xs text-neutral-500">
-                no período selecionado
-              </span>
-            </div>
+          {/* 3. Hero Mood Spline Card: Curva de Serenidade */}
+          <div className="relative w-full rounded-2xl bg-surface-container-low/90 backdrop-blur-md p-space-md overflow-hidden shadow-lg flex flex-col space-y-space-sm border border-outline-variant/40">
+            <div className="absolute -top-12 -right-12 w-44 h-44 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-10 -left-10 w-36 h-36 rounded-full bg-secondary-container/20 blur-2xl pointer-events-none" />
 
-            <div className="p-4 rounded-2xl bg-charcoal-900 border border-charcoal-800 space-y-1">
-              <span className="text-[11px] font-medium text-neutral-400 uppercase tracking-wider">
-                Média de Intensidade
-              </span>
-              <div className="text-2xl font-bold text-sage-400">
-                {avgIntensity} <span className="text-sm font-normal text-neutral-400">/ 10</span>
-              </div>
-              <span className="text-xs text-neutral-500">
-                sensação subjetiva média
-              </span>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-charcoal-900 border border-charcoal-800 space-y-1">
-              <span className="text-[11px] font-medium text-neutral-400 uppercase tracking-wider">
-                Sensação Mais Frequente
-              </span>
-              <div className="text-2xl font-bold text-neutral-100 truncate">
-                {topEmotion ? topEmotion.name : '—'}
-              </div>
-              <span className="text-xs text-neutral-500">
-                {topEmotion ? `${topEmotion.count} registros (${Math.round((topEmotion.count / totalRecords) * 100)}%)` : ''}
-              </span>
-            </div>
-          </div>
-
-          {/* Descriptive Observation Banner */}
-          <div className="p-4 rounded-2xl bg-charcoal-850 border border-charcoal-750 text-xs text-neutral-300 space-y-1.5">
-            <div className="font-semibold text-sage-300 flex items-center gap-1.5">
-              <span>Observação descritiva dos dados</span>
-            </div>
-            <p className="text-neutral-400 leading-relaxed">
-              No intervalo selecionado, a intensidade média relatada foi de {avgIntensity} em 10.
-              A emoção mais registrada foi <strong>{topEmotion?.name}</strong>.
-              Estes números descrevem exclusivamente como você se percebeu nestes momentos e não
-              representam diagnósticos médicos ou estabilidade clínica fixa.
-            </p>
-          </div>
-
-          {/* Chart 1: Intensity Timeline */}
-          <div className="p-5 rounded-2xl bg-charcoal-900 border border-charcoal-800 space-y-4">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between relative z-10">
               <div>
-                <h3 className="text-sm font-semibold text-neutral-100">
-                  Evolução da Intensidade Percebida (0 a 10)
+                <span className="font-label-sm text-label-sm uppercase tracking-wider text-primary font-semibold">
+                  Acompanhamento
+                </span>
+                <h3 className="font-headline-sm text-headline-sm text-on-surface font-bold">
+                  Curva de Serenidade e Intensidade
                 </h3>
-                <p className="text-xs text-neutral-400">
-                  Registros cronológicos no período
-                </p>
+              </div>
+              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high/80 text-on-surface text-label-sm font-label-sm border border-outline-variant/30">
+                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                Média: <span className="font-semibold text-primary">{avgIntensity} / 10</span>
               </div>
             </div>
 
-            {timelineData.length < 2 ? (
-              <p className="text-xs text-neutral-500 py-6 text-center">
-                Adicione pelo menos dois registros para traçar a linha de evolução cronológica.
-              </p>
-            ) : (
-              <div className="h-64 w-full pt-2">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={timelineData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#232834" />
-                    <XAxis
-                      dataKey="date"
-                      stroke="#6B7280"
-                      tick={{ fill: '#9CA3AF', fontSize: 11 }}
-                    />
-                    <YAxis
-                      domain={[0, 10]}
-                      stroke="#6B7280"
-                      tick={{ fill: '#9CA3AF', fontSize: 11 }}
-                      ticks={[0, 2, 4, 6, 8, 10]}
-                    />
-                    <Tooltip
-                      content={({ active, payload }) => {
-                        if (active && payload && payload.length) {
-                          const data = payload[0].payload;
-                          return (
-                            <div className="p-3 rounded-xl bg-charcoal-950 border border-charcoal-750 text-xs space-y-1 shadow-lg">
-                              <p className="font-semibold text-neutral-200">{data.date}</p>
-                              <p className="text-sage-300">Emoção: {data.emotion}</p>
-                              <p className="text-neutral-300">Intensidade: {data.intensity} / 10</p>
-                            </div>
-                          );
-                        }
-                        return null;
-                      }}
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="intensity"
-                      stroke="#528E75"
-                      strokeWidth={2.5}
-                      dot={{ fill: '#528E75', stroke: '#111317', strokeWidth: 2, r: 4 }}
-                      activeDot={{ r: 6, fill: '#76A993' }}
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
+            {/* SVG Trendline Graphic */}
+            <div className="w-full relative pt-2 z-10">
+              <svg className="w-full h-36 overflow-visible" fill="none" viewBox="0 0 340 140" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="splineGradient" x1="0%" x2="0%" y1="0%" y2="100%">
+                    <stop offset="0%" stopColor="#5af0b3" stopOpacity="0.32" />
+                    <stop offset="65%" stopColor="#5af0b3" stopOpacity="0.08" />
+                    <stop offset="100%" stopColor="#5af0b3" stopOpacity="0.0" />
+                  </linearGradient>
+                  <linearGradient id="lineGlow" x1="0%" x2="100%" y1="0%" y2="0%">
+                    <stop offset="0%" stopColor="#34d399" />
+                    <stop offset="45%" stopColor="#ffcf96" />
+                    <stop offset="75%" stopColor="#5af0b3" />
+                    <stop offset="100%" stopColor="#68fcbf" />
+                  </linearGradient>
+                </defs>
+
+                {/* Horizontal reference guides */}
+                <line stroke="#222a3d" strokeDasharray="3 4" strokeWidth="1" x1="0" x2="340" y1="25" y2="25" />
+                <line stroke="#222a3d" strokeDasharray="3 4" strokeWidth="1" x1="0" x2="340" y1="70" y2="70" />
+                <line stroke="#222a3d" strokeDasharray="3 4" strokeWidth="1" x1="0" x2="340" y1="115" y2="115" />
+
+                {/* SVG Path computed from timeline records */}
+                {(() => {
+                  const points = timelineRecords.map((r, i) => {
+                    const x = 15 + (i / Math.max(1, timelineRecords.length - 1)) * 310;
+                    // Invert y: intensity 10 is near y=15, intensity 0 is near y=120
+                    const y = 120 - (r.intensity / 10) * 100;
+                    return { x, y, record: r };
+                  });
+
+                  if (points.length === 1) {
+                    return (
+                      <g>
+                        <circle cx={points[0].x} cy={points[0].y} fill="#5af0b3" r="6" />
+                      </g>
+                    );
+                  }
+
+                  const pathStr = points.reduce((acc, p, i) => {
+                    return i === 0 ? `M ${p.x} ${p.y}` : `${acc} L ${p.x} ${p.y}`;
+                  }, '');
+
+                  const areaStr = `${pathStr} L ${points[points.length - 1].x} 130 L ${points[0].x} 130 Z`;
+
+                  return (
+                    <g>
+                      <path d={areaStr} fill="url(#splineGradient)" />
+                      <path d={pathStr} stroke="url(#lineGlow)" strokeLinecap="round" strokeWidth="3" />
+                      {points.map((p, idx) => (
+                        <circle
+                          key={idx}
+                          cx={p.x}
+                          cy={p.y}
+                          fill="#131b2e"
+                          r="4.5"
+                          stroke="#5af0b3"
+                          strokeWidth="2.5"
+                        />
+                      ))}
+                    </g>
+                  );
+                })()}
+              </svg>
+
+              {/* Day labels footer */}
+              <div className="flex justify-between items-center px-1 pt-1 text-on-surface-variant font-label-sm text-label-sm font-mono">
+                {timelineRecords.slice(0, 6).map((r, i) => (
+                  <span key={i} className="text-[11px]">
+                    {formatDayWeekdayPt(r.record_timestamp)}
+                  </span>
+                ))}
               </div>
-            )}
-          </div>
-
-          {/* Chart 2: Emotion Distribution */}
-          <div className="p-5 rounded-2xl bg-charcoal-900 border border-charcoal-800 space-y-4">
-            <div>
-              <h3 className="text-sm font-semibold text-neutral-100">
-                Distribuição das Emoções Registradas
-              </h3>
-              <p className="text-xs text-neutral-400">
-                Frequência de cada sensação relatada
-              </p>
             </div>
 
-            <div className="h-56 w-full pt-2">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={emotionChartData} layout="vertical">
-                  <CartesianGrid strokeDasharray="3 3" stroke="#232834" horizontal={false} />
-                  <XAxis
-                    type="number"
-                    stroke="#6B7280"
-                    tick={{ fill: '#9CA3AF', fontSize: 11 }}
-                    allowDecimals={false}
-                  />
-                  <YAxis
-                    dataKey="name"
-                    type="category"
-                    stroke="#6B7280"
-                    tick={{ fill: '#D1D5DB', fontSize: 11 }}
-                    width={90}
-                  />
-                  <Tooltip
-                    content={({ active, payload }) => {
-                      if (active && payload && payload.length) {
-                        const data = payload[0].payload;
-                        return (
-                          <div className="p-2.5 rounded-xl bg-charcoal-950 border border-charcoal-750 text-xs shadow-lg">
-                            <span className="font-medium text-neutral-200">
-                              {data.name}: {data.count} registros
-                            </span>
-                          </div>
-                        );
-                      }
-                      return null;
-                    }}
-                  />
-                  <Bar dataKey="count" radius={[0, 6, 6, 0]}>
-                    {emotionChartData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
+            {/* Footnote banner */}
+            <div className="relative z-10 mt-1 px-3.5 py-2.5 rounded-xl bg-surface-container-high/60 flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm border border-outline-variant/30">
+              <div className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-[18px] text-tertiary">flare</span>
+                <span>
+                  {topEmotion
+                    ? `A sensação mais presente foi ${topEmotion.name} (${topEmotionPercent}% dos registros).`
+                    : 'Registros calculados a partir das suas anotações reais.'}
+                </span>
+              </div>
             </div>
           </div>
 
-          {/* Accessible Data Table Alternative */}
-          <div className="p-4 rounded-2xl bg-charcoal-900 border border-charcoal-800 space-y-3">
+          {/* 4. KPI Grid */}
+          <section className="grid grid-cols-2 gap-space-sm w-full">
+            {/* KPI 1: Total Registros */}
+            <div className="col-span-1 rounded-2xl bg-surface-container-low/80 backdrop-blur-md p-space-md flex flex-col justify-between shadow-md relative overflow-hidden border border-outline-variant/40">
+              <div className="flex items-center justify-between mb-2">
+                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                  <span className="material-symbols-outlined text-[18px]">self_improvement</span>
+                </div>
+                <span className="flex items-center text-label-sm font-label-sm text-primary px-2 py-0.5 rounded-full bg-primary/10 font-semibold">
+                  Média: {avgIntensity}
+                </span>
+              </div>
+              <div>
+                <span className="font-label-sm text-label-sm text-on-surface-variant block">Total de Registros</span>
+                <div className="flex items-baseline gap-1 mt-0.5">
+                  <span className="font-display-lg-mobile text-display-lg-mobile text-on-surface font-bold tracking-tight">
+                    {totalRecords}
+                  </span>
+                </div>
+                <span className="font-body-sm text-body-sm text-on-surface-variant text-[11px] block mt-1">
+                  no período selecionado
+                </span>
+              </div>
+            </div>
+
+            {/* KPI 2: Práticas Concluídas */}
+            <div className="col-span-1 rounded-2xl bg-surface-container-low/80 backdrop-blur-md p-space-md flex flex-col justify-between shadow-md relative overflow-hidden border border-outline-variant/40">
+              <div className="flex items-center justify-between mb-2">
+                <div className="w-8 h-8 rounded-full bg-secondary-container/30 flex items-center justify-center text-secondary">
+                  <span className="material-symbols-outlined text-[18px]">check_circle</span>
+                </div>
+                <span className="text-label-sm font-label-sm text-secondary px-2 py-0.5 rounded-full bg-secondary-container/20 font-semibold">
+                  Acolhimento
+                </span>
+              </div>
+              <div>
+                <span className="font-label-sm text-label-sm text-on-surface-variant block">Práticas Realizadas</span>
+                <div className="flex items-baseline gap-1 mt-0.5">
+                  <span className="font-display-lg-mobile text-display-lg-mobile text-on-surface font-bold tracking-tight">
+                    {activitiesCompletedCount}
+                  </span>
+                  <span className="font-label-md text-label-md text-on-surface-variant font-medium">sessões</span>
+                </div>
+                <span className="font-body-sm text-body-sm text-on-surface-variant text-[11px] block mt-1">
+                  exercícios concluídos
+                </span>
+              </div>
+            </div>
+
+            {/* KPI 3: Emoção Predominante (Full Width) */}
+            <div className="col-span-2 rounded-2xl bg-surface-container-low/80 backdrop-blur-md p-space-md flex items-center justify-between shadow-md border border-outline-variant/40">
+              <div className="flex items-center gap-space-sm">
+                <div className="relative w-12 h-12 rounded-2xl bg-tertiary-container/20 flex items-center justify-center text-tertiary shadow-inner">
+                  <span className="material-symbols-outlined text-[26px]" style={{ fontVariationSettings: "'FILL' 1" }}>
+                    spa
+                  </span>
+                  <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-primary rounded-full ring-2 ring-surface" />
+                </div>
+                <div>
+                  <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block font-semibold">
+                    Sensação Mais Frequente
+                  </span>
+                  <span className="font-headline-sm text-headline-sm text-on-surface font-semibold">
+                    {topEmotion ? topEmotion.name : '—'}
+                  </span>
+                  <p className="font-body-sm text-body-sm text-on-surface-variant">
+                    {topEmotion
+                      ? `Presente em ${topEmotionPercent}% dos seus registros de humor`
+                      : 'Registre check-ins para ver sua sensação mais frequente'}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* 5. Accessible Data Table Alternative */}
+          <div className="p-4 rounded-2xl bg-surface-container border border-outline-variant/40 space-y-3">
             <button
               type="button"
               onClick={() => setShowTableAlt((prev) => !prev)}
-              className="w-full flex items-center justify-between text-xs font-medium text-neutral-300 hover:text-white"
+              className="w-full flex items-center justify-between text-xs font-semibold text-on-surface hover:text-primary transition-colors"
             >
               <div className="flex items-center gap-2">
-                <TableIcon className="w-4 h-4 text-sage-400" />
+                <TableIcon className="w-4 h-4 text-primary" />
                 <span>Visualizar alternativa em tabela acessível (leitores de tela)</span>
               </div>
               <ChevronDown
@@ -353,8 +362,8 @@ export const ProgressPage: React.FC = () => {
 
             {showTableAlt && (
               <div className="overflow-x-auto pt-2">
-                <table className="w-full text-left text-xs text-neutral-300">
-                  <thead className="border-b border-charcoal-800 text-neutral-400">
+                <table className="w-full text-left text-xs text-on-surface">
+                  <thead className="border-b border-surface-container-high text-on-surface-variant font-semibold">
                     <tr>
                       <th className="pb-2">Data e Hora</th>
                       <th className="pb-2">Emoção</th>
@@ -362,13 +371,13 @@ export const ProgressPage: React.FC = () => {
                       <th className="pb-2">Atividade</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-charcoal-850">
+                  <tbody className="divide-y divide-surface-container-high/60">
                     {records.map((r) => (
                       <tr key={r.id}>
-                        <td className="py-2">{formatShortDatePt(r.record_timestamp)}</td>
+                        <td className="py-2 font-mono">{formatShortDatePt(r.record_timestamp)}</td>
                         <td className="py-2 font-medium">{r.primary_emotion}</td>
                         <td className="py-2">{r.intensity}/10</td>
-                        <td className="py-2 text-neutral-400">{r.activity_used || '—'}</td>
+                        <td className="py-2 text-on-surface-variant">{r.activity_used || '—'}</td>
                       </tr>
                     ))}
                   </tbody>

@@ -97,50 +97,53 @@ export const ThoughtOrganizerExercise: React.FC<ThoughtOrganizerExerciseProps> =
   };
 
   return (
-    <div className="space-y-6 text-neutral-100">
+    <div className="space-y-6 text-on-surface">
       {/* Header */}
-      <div className="flex items-center justify-between pb-3 border-b border-charcoal-800">
+      <div className="flex items-center justify-between pb-4 border-b border-outline-variant/40">
         <div>
-          <h3 className="text-base font-semibold text-neutral-100">
-            Organizando os Pensamentos
-          </h3>
-          <p className="text-xs text-neutral-400">
+          <div className="flex items-center gap-2 mb-1">
+            <span className="material-symbols-outlined text-primary text-xl">psychology</span>
+            <h3 className="text-base font-semibold text-on-surface">
+              Organizando os Pensamentos
+            </h3>
+          </div>
+          <p className="text-xs text-on-surface-variant">
             Perguntas estruturadas para criar clareza e acolher incertezas.
           </p>
         </div>
         <button
           type="button"
           onClick={onExit}
-          className="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-charcoal-800"
+          className="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"
           aria-label="Encerrar exercício"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4" />
         </button>
       </div>
 
       {/* Steps dots */}
-      <div className="flex items-center gap-1.5 px-2">
+      <div className="flex items-center gap-1.5 px-1">
         {QUESTIONS.map((_, idx) => (
           <div
             key={idx}
-            className={`flex-1 h-1.5 rounded-full transition-colors ${
+            className={`flex-1 h-1.5 rounded-full transition-all ${
               idx === step
-                ? 'bg-sage-500'
+                ? 'bg-primary shadow-[0_0_8px_rgba(90,240,179,0.5)]'
                 : idx < step
-                ? 'bg-sage-800'
-                : 'bg-charcoal-800'
+                ? 'bg-primary/40'
+                : 'bg-surface-container-high'
             }`}
           />
         ))}
       </div>
 
       {/* Question Card */}
-      <div className="p-6 rounded-2xl bg-charcoal-900 border border-charcoal-800 space-y-4">
-        <span className="text-[11px] font-semibold uppercase tracking-wider text-sage-400">
+      <div className="p-6 rounded-3xl bg-surface-container-low border border-outline-variant/40 space-y-4">
+        <span className="text-[11px] font-semibold uppercase tracking-wider text-primary">
           Reflexão {step + 1} de {QUESTIONS.length}
         </span>
-        <h4 className="text-base font-bold text-neutral-100">{currentQ.title}</h4>
-        <p className="text-xs text-neutral-300 leading-relaxed">{currentQ.prompt}</p>
+        <h4 className="text-base font-bold text-on-surface">{currentQ.title}</h4>
+        <p className="text-xs text-on-surface-variant leading-relaxed">{currentQ.prompt}</p>
 
         <Textarea
           placeholder={currentQ.placeholder}
@@ -159,12 +162,12 @@ export const ThoughtOrganizerExercise: React.FC<ThoughtOrganizerExerciseProps> =
 
       {/* Save to diary option at final step */}
       {step === QUESTIONS.length - 1 && (
-        <label className="flex items-center gap-2 text-xs text-neutral-300 cursor-pointer p-2 rounded-xl bg-charcoal-850 border border-charcoal-800">
+        <label className="flex items-center gap-2.5 text-xs text-on-surface cursor-pointer p-3.5 rounded-2xl bg-surface-container border border-outline-variant/50">
           <input
             type="checkbox"
             checked={saveToDiary}
             onChange={(e) => setSaveToDiary(e.target.checked)}
-            className="rounded accent-sage-500 w-4 h-4"
+            className="rounded accent-primary w-4 h-4"
           />
           <span>Salvar minhas reflexões com segurança no Diário Emocional</span>
         </label>
@@ -177,7 +180,7 @@ export const ThoughtOrganizerExercise: React.FC<ThoughtOrganizerExerciseProps> =
           Pergunta anterior
         </Button>
 
-        <Button size="md" onClick={handleNext} isLoading={saving} className="px-5 font-semibold">
+        <Button size="md" onClick={handleNext} isLoading={saving} className="px-6 font-semibold">
           {step === QUESTIONS.length - 1 ? (
             'Finalizar e concluir'
           ) : (

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "error-container": "#93000a", "on-primary": "#003825", "on-error": "#690005", "tertiary-fixed-dim": "#ffb95f", "secondary-fixed": "#e0e0ff", "on-secondary-fixed": "#000767", "on-primary-fixed": "#002114", "tertiary-container": "#ffa929", "on-error-container": "#ffdad6", "surface": "#0b1326", "surface-tint": "#45dfa4", "on-secondary-fixed-variant": "#2f3aa3", "surface-container-high": "#222a3d", "primary": "#5af0b3", "on-tertiary-fixed-variant": "#653e00", "outline": "#85948b", "primary-fixed-dim": "#45dfa4", "error": "#ffb4ab", "surface-bright": "#31394d", "on-tertiary-container": "#6b4200", "on-primary-container": "#00563b", "on-primary-fixed-variant": "#005137", "on-tertiary": "#472a00", "surface-dim": "#0b1326", "secondary": "#bdc2ff", "inverse-primary": "#006c4b", "primary-container": "#34d399", "tertiary": "#ffcf96", "on-background": "#dae2fd", "surface-container-low": "#131b2e", "surface-container": "#171f33", "secondary-container": "#2f3aa3", "on-secondary": "#131e8c", "inverse-surface": "#dae2fd", "surface-container-lowest": "#060e20", "on-surface-variant": "#bbcac0", "inverse-on-surface": "#283044", "secondary-fixed-dim": "#bdc2ff", "background": "#0b1326", "surface-variant": "#2d3449", "on-surface": "#dae2fd", "surface-container-highest": "#2d3449", "on-tertiary-fixed": "#2a1700", "tertiary-fixed": "#ffddb8", "on-secondary-container": "#a8afff", "primary-fixed": "#68fcbf", "outline-variant": "#3c4a42" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-lg": "1.75rem", "margin": "1.25rem", "gutter": "1rem", "space-sm": "0.75rem", "space-xl": "2.5rem", "margin-md": "2rem", "space-xs": "0.375rem", "gutter-md": "1.5rem", "space-md": "1.25rem" }, fontFamily: { "headline-lg": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "display-lg-mobile": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "display-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"] }, fontSize: { "headline-lg": ["28px", { "lineHeight": "36px", "fontWeight": "700" }], "headline-md": ["22px", { "lineHeight": "30px", "fontWeight": "600" }], "label-md": ["13px", { "lineHeight": "18px", "fontWeight": "500" }], "headline-sm": ["18px", { "lineHeight": "26px", "fontWeight": "600" }], "display-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }], "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }], "label-sm": ["11px", { "lineHeight": "16px", "fontWeight": "600" }], "label-lg": ["15px", { "lineHeight": "20px", "fontWeight": "600" }], "display-lg": ["40px", { "lineHeight": "48px", "fontWeight": "700" }], "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }] } } } };</script><style>@layer base { html, body { width: 100%; margin: 0; padding: 0; min-height: 100vh; } body { overscroll-behavior-y: none; } .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); } .pt-safe { padding-top: env(safe-area-inset-top, 0px); } } ::-webkit-scrollbar { display: none; }</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface antialiased flex flex-col min-h-screen selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl pt-safe"><div class="h-16 px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-xs"><img alt="Froid Care Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Wuo8C6inAxxnVhnxgDmjQSaCNEz93B3oeYMfm5FDP-FQUi1QaRvH0o0wKjnlBBqNUkDjVFQOhh-4oWM6_LM9Wa3dFPffOtQMp9T-FwIuXjYeCPvU-wxQf3Fa4ehQ0sJR8tj-On4Q56S1SdQT2a9PjGrnj7DOBGxp9iGTZNFVfTcZaM5oLGGv5SWK2R_ld0B49ewMEeyaOyO28daXMqfq_ZGY9ee3JtF7-OJ55nnyk7sg"/><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-semibold">Froid Care</span><span class="hidden">Relatórios</span></div><div class="flex items-center gap-space-sm"><button aria-label="Ajuda SOS" class="min-h-[44px] px-space-sm py-1.5 rounded-full bg-tertiary-container/15 text-tertiary hover:bg-tertiary-container/25 active:scale-95 transition-all flex items-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-tertiary/40" type="button"><span class="material-symbols-outlined text-[18px] text-tertiary">emergency</span><span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold text-tertiary">SOS</span></button><button aria-label="Meu Perfil" class="min-h-[44px] min-w-[44px] flex items-center justify-center rounded-full hover:opacity-85 transition-opacity focus:outline-none focus:ring-2 focus:ring-primary/40" type="button"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcX8XpdXlA1Kf-29aP1Yt1kwQtup4n3VXe4jJTpyZM4v9TC51TPxE7tPJ0z9Y7bAUOFxoGgYsU4r_cuQkop5eEYwThm-QYbYVqBxsISIGiislt_4L0cCNnOAJJ6sL06AkOZNo1Dov8TdZPWu1ZkJcARMKS7Mt3SEmHesyyZFJjoDyt1iD16YPn2KfOD7hhp8x8rp0VSXnnKI2pAfSu5puQKUmg3vpUxjkaWqILU_OY"/></button></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface px-margin"><div class="flex flex-col w-full pb-6 space-y-5">
+<!-- Header Contextual com Inspiração Clínica Serena -->
+<div class="flex flex-col gap-1.5 pt-2">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">description</span>
+</div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-semibold">Compartilhamento Seguro</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Relatórios em PDF</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Gere um documento organizado para compartilhar com seu terapeuta ou guardar para acompanhamento pessoal contínuo.</p>
+</div>
+<!-- Card Principal de Configuração do Relatório -->
+<div class="bg-surface-container rounded-xl p-space-md flex flex-col gap-5 shadow-sm">
+<!-- Período de Exportação -->
+<div class="flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<label class="font-label-lg text-label-lg text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-primary">calendar_month</span>
+          Período de exportação
+        </label>
+<span class="font-label-sm text-label-sm text-on-surface-variant" id="period-indicator">30 dias selecionados</span>
+</div>
+<div class="grid grid-cols-2 gap-2" id="period-chips">
+<button class="period-btn py-2 px-3 rounded-full text-center font-label-md text-label-md transition-all bg-surface-container-high text-on-surface-variant hover:text-on-surface active:scale-95 flex items-center justify-center gap-1.5" data-period="7d" type="button">
+<span>Últimos 7 dias</span>
+</button>
+<button class="period-btn active py-2 px-3 rounded-full text-center font-label-md text-label-md transition-all bg-primary text-on-primary font-semibold shadow-sm active:scale-95 flex items-center justify-center gap-1.5" data-period="30d" type="button">
+<span class="material-symbols-outlined text-[16px]">check</span>
+<span>Últimos 30 dias</span>
+</button>
+<button class="period-btn py-2 px-3 rounded-full text-center font-label-md text-label-md transition-all bg-surface-container-high text-on-surface-variant hover:text-on-surface active:scale-95 flex items-center justify-center gap-1.5" data-period="month" type="button">
+<span>Mês atual</span>
+</button>
+<button class="period-btn py-2 px-3 rounded-full text-center font-label-md text-label-md transition-all bg-surface-container-high text-on-surface-variant hover:text-on-surface active:scale-95 flex items-center justify-center gap-1.5" data-period="custom" type="button">
+<span class="material-symbols-outlined text-[15px]">date_range</span>
+<span>Personalizado</span>
+</button>
+</div>
+</div>
+<!-- Nome de Exibição no Cabeçalho -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-lg text-label-lg text-on-surface flex items-center gap-1.5" for="display-name">
+<span class="material-symbols-outlined text-[18px] text-primary">badge</span>
+        Nome de exibição no cabeçalho
+      </label>
+<div class="relative flex items-center">
+<input class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md rounded-lg px-3.5 py-2.5 focus:outline-none focus:bg-surface-container-highest transition-colors placeholder:text-on-surface-variant/40" id="display-name" placeholder="Ex: Seu nome ou pseudônimo" type="text" value="Visitante"/>
+<button class="absolute right-2 text-on-surface-variant hover:text-on-surface p-1 rounded-full text-[16px]" id="clear-name-btn" title="Limpar para anônimo" type="button">
+<span class="material-symbols-outlined text-[18px]">backspace</span>
+</button>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant px-0.5">
+<span class="material-symbols-outlined text-[14px] text-tertiary">info</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Deixe em branco se preferir um relatório confidencial/anônimo.</span>
+</div>
+</div>
+<!-- Seções Incluídas no Documento -->
+<div class="flex flex-col gap-2.5">
+<span class="font-label-lg text-label-lg text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-primary">fact_check</span>
+        Seções incluídas no documento
+      </span>
+<div class="flex flex-col gap-2">
+<!-- Toggle Item 1 -->
+<label class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-3 pr-2 min-w-0">
+<div class="w-7 h-7 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">query_stats</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">Resumo e médias de intensidade</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Níveis emocionais, picos e oscilações</span>
+</div>
+</div>
+<div class="relative shrink-0 flex items-center">
+<input checked="" class="sr-only peer" id="sec-metrics" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-on-primary after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface-variant after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary peer-checked:after:bg-on-primary"></div>
+</div>
+</label>
+<!-- Toggle Item 2 -->
+<label class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-3 pr-2 min-w-0">
+<div class="w-7 h-7 rounded-lg bg-secondary/10 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">draw</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">Anotações e contextos relatados</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Gatilhos diários e reflexões de sessão</span>
+</div>
+</div>
+<div class="relative shrink-0 flex items-center">
+<input checked="" class="sr-only peer" id="sec-notes" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-on-primary after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface-variant after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary peer-checked:after:bg-on-primary"></div>
+</div>
+</label>
+<!-- Toggle Item 3 -->
+<label class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-3 pr-2 min-w-0">
+<div class="w-7 h-7 rounded-lg bg-tertiary/10 text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">self_improvement</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">Exercícios e práticas de acolhimento</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Sessões de respiração e grounded somático</span>
+</div>
+</div>
+<div class="relative shrink-0 flex items-center">
+<input checked="" class="sr-only peer" id="sec-practices" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-on-primary after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface-variant after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary peer-checked:after:bg-on-primary"></div>
+</div>
+</label>
+</div>
+</div>
+</div>
+<!-- Ação Primária -->
+<div class="flex flex-col gap-2">
+<button class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-primary to-primary-container text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-2 shadow-[0_12px_28px_-8px_rgba(52,211,153,0.35)] active:scale-[0.98] transition-all" id="btn-download-pdf" type="button">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">picture_as_pdf</span>
+<span id="btn-label-text">Baixar Relatório em PDF</span>
+</button>
+<div class="flex items-center justify-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+<span class="font-body-sm text-body-sm">Criptografia de ponta a ponta. Dados compilados estritamente no aparelho.</span>
+</div>
+</div>
+<!-- Pré-visualização do Documento -->
+<div class="bg-surface-container rounded-xl p-space-md flex flex-col gap-3 shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">visibility</span>
+<span class="font-label-lg text-label-lg text-on-surface">Pré-visualização do Documento</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-container-high text-primary font-medium">A4 • 3 páginas</span>
+</div>
+<!-- Mockup da Capa do Documento Clínico -->
+<div class="relative bg-surface-container-lowest rounded-xl p-4 flex flex-col gap-3 overflow-hidden shadow-inner">
+<!-- Barra decorativa clínica no topo do documento -->
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-primary-container to-secondary"></div>
+<!-- Cabeçalho do Documento Simulado -->
+<div class="flex items-start justify-between pb-2 border-none">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-[16px]">health_and_safety</span>
+<span class="font-label-sm text-label-sm font-bold uppercase tracking-wider">Froid Care • Relatório Clínico</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface mt-1" id="preview-patient-name">Paciente: Visitante</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant" id="preview-range-text">Período: 21 de Out - 20 de Nov (30 dias)</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-mono">ID: FC-8492</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Versão 2.4</span>
+</div>
+</div>
+<!-- Resumo Gráfico em Miniatura -->
+<div class="bg-surface-container-low rounded-lg p-3 flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Oscilação Emocional (Média Geral)</span>
+<span class="font-label-sm text-label-sm text-primary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">trending_up</span> Estável (+14%)
+          </span>
+</div>
+<!-- Mini Sparkline SVG -->
+<div class="w-full h-12 flex items-center">
+<svg class="w-full h-full overflow-visible" fill="none" viewbox="0 0 280 48">
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#5af0b3" stop-opacity="0.35"></stop>
+<stop offset="100%" stop-color="#5af0b3" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<!-- Área preenchida -->
+<path d="M0 38 Q 30 42 60 25 T 120 30 T 180 14 T 240 18 T 280 8 L 280 48 L 0 48 Z" fill="url(#chartGradient)"></path>
+<!-- Linha principal -->
+<path d="M0 38 Q 30 42 60 25 T 120 30 T 180 14 T 240 18 T 280 8" stroke="#5af0b3" stroke-linecap="round" stroke-width="2.2"></path>
+<!-- Pontos focais -->
+<circle cx="180" cy="14" fill="#5af0b3" r="3"></circle>
+<circle cx="280" cy="8" fill="#34d399" r="3.5"></circle>
+</svg>
+</div>
+<div class="grid grid-cols-3 gap-2 pt-1">
+<div class="bg-surface-container rounded p-1.5 flex flex-col items-center text-center">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Check-ins</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">28 reg.</span>
+</div>
+<div class="bg-surface-container rounded p-1.5 flex flex-col items-center text-center">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Humor Pred.</span>
+<span class="font-label-md text-label-md text-primary font-semibold">Sereno</span>
+</div>
+<div class="bg-surface-container rounded p-1.5 flex flex-col items-center text-center">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Práticas</span>
+<span class="font-label-md text-label-md text-tertiary font-semibold">19 concluídas</span>
+</div>
+</div>
+</div>
+<!-- Linhas de Pré-visualização Textual Elegantes -->
+<div class="space-y-1.5 px-0.5">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary shrink-0"></span>
+<span class="font-label-sm text-label-sm text-on-surface">Capítulo 1: Linha do tempo &amp; gatilhos associados</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary shrink-0"></span>
+<span class="font-label-sm text-label-sm text-on-surface">Capítulo 2: Relato analítico das práticas de grounding</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary shrink-0"></span>
+<span class="font-label-sm text-label-sm text-on-surface">Capítulo 3: Espaço reservado para devolutiva terapêutica</span>
+</div>
+</div>
+<!-- Rodapé do Mockup -->
+<div class="pt-2 flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-primary">verified_user</span>
+          Documento Clínico Válido
+        </span>
+<span>Página 1 de 3</span>
+</div>
+</div>
+</div>
+<!-- Cartão de Aconselhamento Terapêutico -->
+<div class="bg-surface-container-low rounded-xl p-4 flex items-start gap-3">
+<div class="w-8 h-8 rounded-full bg-tertiary-container/20 text-tertiary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">lightbulb</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Dica para sua próxima sessão</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Compartilhe o PDF antes da consulta ou utilize os registros para explorar padrões de ansiedade que costumam passar despercebidos.</p>
+</div>
+</div>
+</div>
+<script>
+  (function initReportModule() {
+    const periodButtons = document.querySelectorAll('.period-btn');
+    const periodIndicator = document.getElementById('period-indicator');
+    const previewRange = document.getElementById('preview-range-text');
+    const nameInput = document.getElementById('display-name');
+    const clearNameBtn = document.getElementById('clear-name-btn');
+    const previewName = document.getElementById('preview-patient-name');
+    const downloadBtn = document.getElementById('btn-download-pdf');
+    const btnLabel = document.getElementById('btn-label-text');
+
+    // Mapeamento de descrições dos períodos
+    const periodMap = {
+      '7d': {
+        indicator: '7 dias selecionados',
+        preview: 'Período: 14 de Nov - 20 de Nov (7 dias)'
+      },
+      '30d': {
+        indicator: '30 dias selecionados',
+        preview: 'Período: 21 de Out - 20 de Nov (30 dias)'
+      },
+      'month': {
+        indicator: 'Mês de Novembro',
+        preview: 'Período: 01 de Nov - 20 de Nov (Mês corrente)'
+      },
+      'custom': {
+        indicator: 'Intervalo customizado',
+        preview: 'Período: Intervalo selecionado pelo usuário'
+      }
+    };
+
+    // Alternância de Chips com estilo tátil
+    periodButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        periodButtons.forEach(b => {
+          b.classList.remove('bg-primary', 'text-on-primary', 'font-semibold', 'shadow-sm', 'active');
+          b.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+          // remove check icon if present
+          const icon = b.querySelector('.material-symbols-outlined');
+          if (icon && icon.textContent === 'check') {
+            icon.remove();
+          }
+        });
+
+        btn.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+        btn.classList.add('bg-primary', 'text-on-primary', 'font-semibold', 'shadow-sm', 'active');
+        
+        // Adiciona ícone de check elegante
+        if (!btn.querySelector('.material-symbols-outlined')) {
+          const checkIcon = document.createElement('span');
+          checkIcon.className = 'material-symbols-outlined text-[16px]';
+          checkIcon.textContent = 'check';
+          btn.prepend(checkIcon);
+        }
+
+        const periodKey = btn.getAttribute('data-period');
+        if (periodMap[periodKey]) {
+          if (periodIndicator) periodIndicator.textContent = periodMap[periodKey].indicator;
+          if (previewRange) previewRange.textContent = periodMap[periodKey].preview;
+        }
+      });
+    });
+
+    // Atualização reativa do Nome de exibição
+    if (nameInput && previewName) {
+      nameInput.addEventListener('input', (e) => {
+        const val = e.target.value.trim();
+        if (val) {
+          previewName.textContent = 'Paciente: ' + val;
+        } else {
+          previewName.textContent = 'Relatório Confidencial (Anônimo)';
+        }
+      });
+    }
+
+    if (clearNameBtn && nameInput && previewName) {
+      clearNameBtn.addEventListener('click', () => {
+        nameInput.value = '';
+        previewName.textContent = 'Relatório Confidencial (Anônimo)';
+        nameInput.focus();
+      });
+    }
+
+    // Feedback tátil de download
+    if (downloadBtn && btnLabel) {
+      downloadBtn.addEventListener('click', () => {
+        const originalText = btnLabel.textContent;
+        btnLabel.textContent = 'Compilando e Criptografando...';
+        downloadBtn.classList.add('opacity-80', 'pointer-events-none');
+
+        setTimeout(() => {
+          btnLabel.textContent = 'Relatório Gerado com Sucesso!';
+          downloadBtn.classList.remove('opacity-80');
+          
+          setTimeout(() => {
+            btnLabel.textContent = originalText;
+            downloadBtn.classList.remove('pointer-events-none');
+          }, 2400);
+        }, 1200);
+      });
+    }
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/85 backdrop-blur-xl shadow-[0_-2px_16px_rgba(0,0,0,0.35)]" data-active-classes="text-primary font-semibold"><div class="h-20 px-gutter flex items-center justify-around"><a aria-label="Início" class="min-w-[44px] min-h-[44px] py-1 px-2 flex flex-col items-center justify-center gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors rounded-xl" data-path="inicio" href="#"><span class="material-symbols-outlined text-[24px]">home</span><span class="font-label-sm text-label-sm">Início</span></a><a aria-label="Acolhimento" class="min-w-[44px] min-h-[44px] py-1 px-2 flex flex-col items-center justify-center gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors rounded-xl" data-path="acolhimento" href="#"><span class="material-symbols-outlined text-[24px]">favorite</span><span class="font-label-sm text-label-sm">Acolhimento</span></a><a aria-label="Diário" class="min-w-[44px] min-h-[44px] py-1 px-2 flex flex-col items-center justify-center gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors rounded-xl" data-path="diario" href="#"><span class="material-symbols-outlined text-[24px]">edit_note</span><span class="font-label-sm text-label-sm">Diário</span></a><a aria-label="Progresso" class="min-w-[44px] min-h-[44px] py-1 px-2 flex flex-col items-center justify-center gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors rounded-xl" data-path="progresso" href="#"><span class="material-symbols-outlined text-[24px]">insights</span><span class="font-label-sm text-label-sm">Progresso</span></a><a aria-label="Relatórios" class="min-w-[44px] min-h-[44px] py-1 px-2 flex flex-col items-center justify-center gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors rounded-xl" data-path="relatorios" href="#"><span class="material-symbols-outlined text-[24px]">clinical_notes</span><span class="font-label-sm text-label-sm">Relatórios</span></a></div></nav></body></html>

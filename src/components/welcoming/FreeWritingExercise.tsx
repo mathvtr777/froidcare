@@ -58,32 +58,35 @@ export const FreeWritingExercise: React.FC<FreeWritingExerciseProps> = ({
   };
 
   return (
-    <div className="space-y-6 text-neutral-100">
+    <div className="space-y-6 text-on-surface">
       {/* Header */}
-      <div className="flex items-center justify-between pb-3 border-b border-charcoal-800">
+      <div className="flex items-center justify-between pb-4 border-b border-outline-variant/40">
         <div>
-          <h3 className="text-base font-semibold text-neutral-100">
-            Escrita Livre e Desabafo
-          </h3>
-          <p className="text-xs text-neutral-400">
+          <div className="flex items-center gap-2 mb-1">
+            <span className="material-symbols-outlined text-primary text-xl">stylus_note</span>
+            <h3 className="text-base font-semibold text-on-surface">
+              Escrita Livre e Desabafo
+            </h3>
+          </div>
+          <p className="text-xs text-on-surface-variant">
             Espaço confidencial para colocar tudo o que vier à mente, sem julgamento ou correções.
           </p>
         </div>
         <button
           type="button"
           onClick={handleAttemptExit}
-          className="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-charcoal-800"
+          className="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"
           aria-label="Encerrar escrita"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4" />
         </button>
       </div>
 
       {/* Editor Area */}
       <div className="space-y-2">
-        <div className="flex items-center justify-between text-xs text-neutral-400 px-1">
+        <div className="flex items-center justify-between text-xs text-on-surface-variant px-1">
           <span>Escreva no seu próprio fluxo...</span>
-          <span>{wordsCount} palavras</span>
+          <span className="font-mono text-primary">{wordsCount} palavras</span>
         </div>
 
         <Textarea
@@ -95,7 +98,7 @@ export const FreeWritingExercise: React.FC<FreeWritingExerciseProps> = ({
         />
       </div>
 
-      <div className="flex items-center justify-between pt-2">
+      <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
         <Button
           variant="ghost"
           size="sm"
@@ -103,13 +106,13 @@ export const FreeWritingExercise: React.FC<FreeWritingExerciseProps> = ({
             if (content.trim()) setShowDiscardConfirm(true);
             else onExit();
           }}
-          className="text-neutral-400 hover:text-rose-400"
+          className="text-on-surface-variant hover:text-error"
         >
           <Trash2 className="w-4 h-4 mr-1.5" />
           Descartar texto
         </Button>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           <Button
             variant="secondary"
             size="sm"
@@ -123,7 +126,7 @@ export const FreeWritingExercise: React.FC<FreeWritingExerciseProps> = ({
             onClick={handleSaveToDiary}
             isLoading={saving}
             disabled={!content.trim()}
-            className="font-semibold"
+            className="font-semibold px-6"
           >
             <Save className="w-4 h-4 mr-1.5" />
             Salvar no Diário

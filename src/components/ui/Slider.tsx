@@ -19,8 +19,8 @@ export const IntensitySlider: React.FC<IntensitySliderProps> = ({
   return (
     <div className="w-full space-y-2">
       <div className="flex justify-between items-baseline">
-        <label className="text-xs font-medium text-neutral-300">{label}</label>
-        <span className="text-sm font-semibold text-sage-400">
+        <label className="text-xs font-semibold text-on-surface">{label}</label>
+        <span className="text-sm font-semibold text-primary">
           Nível {value} / 10
         </span>
       </div>
@@ -32,7 +32,7 @@ export const IntensitySlider: React.FC<IntensitySliderProps> = ({
         step={1}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full h-2 bg-charcoal-800 rounded-lg appearance-none cursor-pointer accent-sage-500 focus:outline-none focus:ring-2 focus:ring-sage-500/40"
+        className="w-full h-2 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-primary focus:outline-none focus:ring-2 focus:ring-primary/40"
         aria-valuemin={0}
         aria-valuemax={10}
         aria-valuenow={value}
@@ -40,7 +40,7 @@ export const IntensitySlider: React.FC<IntensitySliderProps> = ({
       />
 
       {/* Ticks representation */}
-      <div className="flex justify-between px-1 text-[10px] text-neutral-500 select-none">
+      <div className="flex justify-between px-1 text-[10px] text-on-surface-variant select-none font-mono">
         <span>0</span>
         <span>2</span>
         <span>4</span>
@@ -50,12 +50,12 @@ export const IntensitySlider: React.FC<IntensitySliderProps> = ({
       </div>
 
       {/* Textual accessibility description */}
-      <div className="p-2.5 rounded-xl bg-charcoal-900 border border-charcoal-800 text-xs text-neutral-300">
-        <span className="font-medium text-neutral-200">{currentLevel.label}:</span>{' '}
-        <span className="text-neutral-400">{currentLevel.description}</span>
+      <div className="p-3 rounded-xl bg-surface-container border border-outline-variant/60 text-xs text-on-surface">
+        <span className="font-semibold text-primary">{currentLevel.label}:</span>{' '}
+        <span className="text-on-surface-variant">{currentLevel.description}</span>
       </div>
 
-      {helperText && <p className="text-xs text-neutral-500">{helperText}</p>}
+      {helperText && <p className="text-xs text-on-surface-variant">{helperText}</p>}
     </div>
   );
 };

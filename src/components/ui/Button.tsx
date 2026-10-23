@@ -3,7 +3,7 @@ import { cn } from '../../lib/utils';
 import { Loader2 } from 'lucide-react';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'gradient';
   size?: 'sm' | 'md' | 'lg';
   isLoading?: boolean;
 }
@@ -11,25 +11,27 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', isLoading = false, children, disabled, ...props }, ref) => {
     const baseStyles =
-      'inline-flex items-center justify-center font-medium transition-colors rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-500 disabled:opacity-50 disabled:cursor-not-allowed select-none active:scale-[0.99]';
+      'inline-flex items-center justify-center font-medium transition-all rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 disabled:opacity-50 disabled:cursor-not-allowed select-none active:scale-[0.98]';
 
     const variants = {
       primary:
-        'bg-sage-600 hover:bg-sage-500 text-white shadow-sm hover:shadow active:bg-sage-700',
+        'bg-primary hover:bg-primary-container text-on-primary font-semibold shadow-lg shadow-primary/20',
+      gradient:
+        'bg-gradient-to-r from-primary to-primary-container text-on-primary font-semibold shadow-[0_12px_28px_-6px_rgba(90,240,179,0.28)] hover:opacity-95',
       secondary:
-        'bg-charcoal-800 hover:bg-charcoal-700 text-neutral-200 border border-charcoal-600/70',
+        'bg-surface-container-high hover:bg-surface-container-highest text-on-surface shadow-sm',
       outline:
-        'border border-charcoal-600 bg-transparent hover:bg-charcoal-800/80 text-neutral-200',
+        'border border-outline-variant bg-transparent hover:bg-surface-container text-on-surface',
       ghost:
-        'bg-transparent hover:bg-charcoal-800/60 text-neutral-300 hover:text-white',
+        'bg-transparent hover:bg-surface-container text-on-surface-variant hover:text-on-surface',
       danger:
-        'bg-rose-900/40 hover:bg-rose-900/70 text-rose-200 border border-rose-800/60',
+        'bg-error-container/30 hover:bg-error-container/50 text-error border border-error/30',
     };
 
     const sizes = {
-      sm: 'px-3 py-1.5 text-xs gap-1.5 min-h-[34px]',
-      md: 'px-4 py-2 text-sm gap-2 min-h-[42px]',
-      lg: 'px-5 py-2.5 text-base gap-2.5 min-h-[48px]',
+      sm: 'px-3 py-1.5 text-xs gap-1.5 min-h-[36px]',
+      md: 'px-5 py-2.5 text-sm gap-2 min-h-[44px]',
+      lg: 'px-6 py-3.5 text-base gap-2.5 min-h-[50px]',
     };
 
     return (
@@ -47,4 +49,3 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 );
 
 Button.displayName = 'Button';
-

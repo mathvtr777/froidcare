@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "error-container": "#93000a", "on-primary": "#003825", "on-error": "#690005", "tertiary-fixed-dim": "#ffb95f", "secondary-fixed": "#e0e0ff", "on-secondary-fixed": "#000767", "on-primary-fixed": "#002114", "tertiary-container": "#ffa929", "on-error-container": "#ffdad6", "surface": "#0b1326", "surface-tint": "#45dfa4", "on-secondary-fixed-variant": "#2f3aa3", "surface-container-high": "#222a3d", "primary": "#5af0b3", "on-tertiary-fixed-variant": "#653e00", "outline": "#85948b", "primary-fixed-dim": "#45dfa4", "error": "#ffb4ab", "surface-bright": "#31394d", "on-tertiary-container": "#6b4200", "on-primary-container": "#00563b", "on-primary-fixed-variant": "#005137", "on-tertiary": "#472a00", "surface-dim": "#0b1326", "secondary": "#bdc2ff", "inverse-primary": "#006c4b", "primary-container": "#34d399", "tertiary": "#ffcf96", "on-background": "#dae2fd", "surface-container-low": "#131b2e", "surface-container": "#171f33", "secondary-container": "#2f3aa3", "on-secondary": "#131e8c", "inverse-surface": "#dae2fd", "surface-container-lowest": "#060e20", "on-surface-variant": "#bbcac0", "inverse-on-surface": "#283044", "secondary-fixed-dim": "#bdc2ff", "background": "#0b1326", "surface-variant": "#2d3449", "on-surface": "#dae2fd", "surface-container-highest": "#2d3449", "on-tertiary-fixed": "#2a1700", "tertiary-fixed": "#ffddb8", "on-secondary-container": "#a8afff", "primary-fixed": "#68fcbf", "outline-variant": "#3c4a42" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-lg": "1.75rem", "margin": "1.25rem", "gutter": "1rem", "space-sm": "0.75rem", "space-xl": "2.5rem", "margin-md": "2rem", "space-xs": "0.375rem", "gutter-md": "1.5rem", "space-md": "1.25rem" }, fontFamily: { "headline-lg": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "display-lg-mobile": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "display-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"] }, fontSize: { "headline-lg": ["28px", { "lineHeight": "36px", "fontWeight": "700" }], "headline-md": ["22px", { "lineHeight": "30px", "fontWeight": "600" }], "label-md": ["13px", { "lineHeight": "18px", "fontWeight": "500" }], "headline-sm": ["18px", { "lineHeight": "26px", "fontWeight": "600" }], "display-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }], "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }], "label-sm": ["11px", { "lineHeight": "16px", "fontWeight": "600" }], "label-lg": ["15px", { "lineHeight": "20px", "fontWeight": "600" }], "display-lg": ["40px", { "lineHeight": "48px", "fontWeight": "700" }], "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }] } } } };</script><style>@layer base { html, body { width: 100%; margin: 0; padding: 0; min-height: 100vh; } body { overscroll-behavior-y: none; } .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); } .pt-safe { padding-top: env(safe-area-inset-top, 0px); } } ::-webkit-scrollbar { display: none; }</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface antialiased flex flex-col min-h-screen selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl pt-safe"><div class="h-16 px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-xs"><img alt="Froid Care Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Wuo8C6inAxxnVhnxgDmjQSaCNEz93B3oeYMfm5FDP-FQUi1QaRvH0o0wKjnlBBqNUkDjVFQOhh-4oWM6_LM9Wa3dFPffOtQMp9T-FwIuXjYeCPvU-wxQf3Fa4ehQ0sJR8tj-On4Q56S1SdQT2a9PjGrnj7DOBGxp9iGTZNFVfTcZaM5oLGGv5SWK2R_ld0B49ewMEeyaOyO28daXMqfq_ZGY9ee3JtF7-OJ55nnyk7sg"/><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-semibold">Froid Care</span><span class="hidden">Progresso</span></div><div class="flex items-center gap-space-sm"><button aria-label="Ajuda SOS" class="min-h-[44px] px-space-sm py-1.5 rounded-full bg-tertiary-container/15 text-tertiary hover:bg-tertiary-container/25 active:scale-95 transition-all flex items-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-tertiary/40" type="button"><span class="material-symbols-outlined text-[18px] text-tertiary">emergency</span><span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold text-tertiary">SOS</span></button><button aria-label="Meu Perfil" class="min-h-[44px] min-w-[44px] flex items-center justify-center rounded-full hover:opacity-85 transition-opacity focus:outline-none focus:ring-2 focus:ring-primary/40" type="button"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcX8XpdXlA1Kf-29aP1Yt1kwQtup4n3VXe4jJTpyZM4v9TC51TPxE7tPJ0z9Y7bAUOFxoGgYsU4r_cuQkop5eEYwThm-QYbYVqBxsISIGiislt_4L0cCNnOAJJ6sL06AkOZNo1Dov8TdZPWu1ZkJcARMKS7Mt3SEmHesyyZFJjoDyt1iD16YPn2KfOD7hhp8x8rp0VSXnnKI2pAfSu5puQKUmg3vpUxjkaWqILU_OY"/></button></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface px-margin"><div class="flex flex-col w-full pb-8 space-y-space-md">
+<!-- Header Section -->
+<section class="flex flex-col space-y-1">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">insights</span>
+</span>
+<h2 class="font-headline-md text-headline-md text-on-surface tracking-tight">Meu Progresso</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+      Acompanhe a distribuição e as variações das suas emoções com base em dados reais.
+    </p>
+</section>
+<!-- Segmented Time Period Selector -->
+<div class="w-full bg-surface-container-lowest/80 p-1 rounded-full flex items-center justify-between shadow-inner">
+<button class="flex-1 py-1.5 px-3 rounded-full font-label-md text-label-md text-on-primary bg-primary transition-all duration-300 text-center shadow-sm" id="tab-7d" onclick="switchPeriod('7d')" type="button">
+      7 dias
+    </button>
+<button class="flex-1 py-1.5 px-3 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all duration-300 text-center" id="tab-30d" onclick="switchPeriod('30d')" type="button">
+      30 dias
+    </button>
+<button class="flex-1 py-1.5 px-3 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all duration-300 text-center" id="tab-all" onclick="switchPeriod('all')" type="button">
+      Todo o histórico
+    </button>
+</div>
+<!-- Hero Mood Spline Card -->
+<div class="relative w-full rounded-2xl bg-surface-container-low/90 backdrop-blur-md p-margin overflow-hidden shadow-lg flex flex-col space-y-space-sm">
+<!-- Ambient luminous background accent -->
+<div class="absolute -top-12 -right-12 w-44 h-44 rounded-full bg-primary/10 blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-10 -left-10 w-36 h-36 rounded-full bg-secondary-container/20 blur-2xl pointer-events-none"></div>
+<div class="flex items-center justify-between relative z-10">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-semibold">Balanço Semanal</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Curva de Serenidade</h3>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high/80 text-on-surface text-label-sm font-label-sm">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+        Média: <span class="font-semibold text-primary">7.8 / 10</span>
+</div>
+</div>
+<!-- Interactive Spline Graph SVG -->
+<div class="w-full relative pt-2 z-10">
+<svg class="w-full h-36 overflow-visible" fill="none" viewbox="0 0 340 140" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="splineGradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#5af0b3" stop-opacity="0.32"></stop>
+<stop offset="65%" stop-color="#5af0b3" stop-opacity="0.08"></stop>
+<stop offset="100%" stop-color="#5af0b3" stop-opacity="0.0"></stop>
+</lineargradient>
+<lineargradient id="lineGlow" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#34d399"></stop>
+<stop offset="45%" stop-color="#ffcf96"></stop>
+<stop offset="75%" stop-color="#5af0b3"></stop>
+<stop offset="100%" stop-color="#68fcbf"></stop>
+</lineargradient>
+</defs>
+<!-- Subtle horizontal guides -->
+<line stroke="#222a3d" stroke-dasharray="3 4" stroke-width="1" x1="0" x2="340" y1="25" y2="25"></line>
+<line stroke="#222a3d" stroke-dasharray="3 4" stroke-width="1" x1="0" x2="340" y1="70" y2="70"></line>
+<line stroke="#222a3d" stroke-dasharray="3 4" stroke-width="1" x1="0" x2="340" y1="115" y2="115"></line>
+<!-- Area Fill under spline -->
+<path d="M 15 85 C 45 60, 60 105, 95 98 C 130 92, 145 42, 180 48 C 215 54, 230 75, 265 30 C 300 -10, 315 22, 330 20 L 330 130 L 15 130 Z" fill="url(#splineGradient)"></path>
+<!-- Spline Line -->
+<path d="M 15 85 C 45 60, 60 105, 95 98 C 130 92, 145 42, 180 48 C 215 54, 230 75, 265 30 C 300 -10, 315 22, 330 20" id="graph-curve" stroke="url(#lineGlow)" stroke-linecap="round" stroke-width="3.5"></path>
+<!-- Interactive Points -->
+<!-- Terça (Downturn Point) -->
+<g class="cursor-pointer" onclick="showTip('Terça-feira', 'Nível: 5.2 - Sobrecarga percebida')">
+<circle cx="95" cy="98" fill="#131b2e" r="5" stroke="#ffcf96" stroke-width="2.5"></circle>
+<circle cx="95" cy="98" fill="#ffcf96" fill-opacity="0.15" r="9"></circle>
+</g>
+<!-- Sábado (Peak Point) -->
+<g class="cursor-pointer" onclick="showTip('Sábado', 'Nível: 9.4 - Pico de bem-estar')">
+<circle cx="265" cy="30" fill="#131b2e" r="5.5" stroke="#5af0b3" stroke-width="2.5"></circle>
+<circle class="animate-ping" cx="265" cy="30" fill="#5af0b3" fill-opacity="0.2" r="11" style="animation-duration: 3s;"></circle>
+</g>
+</svg>
+<!-- Day labels -->
+<div class="flex justify-between items-center px-1 pt-1 text-on-surface-variant font-label-sm text-label-sm">
+<span>Seg</span>
+<span class="text-tertiary font-semibold">Ter</span>
+<span>Qua</span>
+<span>Qui</span>
+<span>Sex</span>
+<span class="text-primary font-semibold">Sáb</span>
+<span>Dom</span>
+</div>
+</div>
+<!-- Graph dynamic footnote banner -->
+<div class="relative z-10 mt-1 px-3 py-2 rounded-xl bg-surface-container-high/60 flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm" id="graph-feedback">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-tertiary">flare</span>
+<span>Pico emocional registrado no <strong>Sábado</strong> após respiração guiada.</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-primary">arrow_forward_ios</span>
+</div>
+</div>
+<!-- KPI Grid -->
+<section class="grid grid-cols-2 gap-space-sm w-full">
+<!-- KPI 1: Índice de Serenidade -->
+<div class="col-span-1 rounded-2xl bg-surface-container-low/80 backdrop-blur-md p-space-md flex flex-col justify-between shadow-md relative overflow-hidden">
+<div class="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-bl-full pointer-events-none"></div>
+<div class="flex items-center justify-between mb-2">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">self_improvement</span>
+</div>
+<span class="flex items-center text-label-sm font-label-sm text-primary px-2 py-0.5 rounded-full bg-primary/10">
+<span class="material-symbols-outlined text-[12px] mr-0.5">trending_up</span>+12%
+        </span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Índice de Serenidade</span>
+<div class="flex items-baseline gap-1 mt-0.5">
+<span class="font-display-lg-mobile text-display-lg-mobile text-on-surface font-bold tracking-tight">78%</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[11px] block mt-1">vs. 66% na semana ant.</span>
+</div>
+</div>
+<!-- KPI 2: Práticas Realizadas -->
+<div class="col-span-1 rounded-2xl bg-surface-container-low/80 backdrop-blur-md p-space-md flex flex-col justify-between shadow-md relative overflow-hidden">
+<div class="absolute top-0 right-0 w-20 h-20 bg-secondary-container/10 rounded-bl-full pointer-events-none"></div>
+<div class="flex items-center justify-between mb-2">
+<div class="w-8 h-8 rounded-full bg-secondary-container/30 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+</div>
+<span class="text-label-sm font-label-sm text-secondary px-2 py-0.5 rounded-full bg-secondary-container/20">
+          Meta 100%
+        </span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Práticas Concluídas</span>
+<div class="flex items-baseline gap-1 mt-0.5">
+<span class="font-display-lg-mobile text-display-lg-mobile text-on-surface font-bold tracking-tight">18</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-medium">sessões</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[11px] block mt-1">Sessão média: 8 min</span>
+</div>
+</div>
+<!-- KPI 3: Emoção Predominante (Full Width) -->
+<div class="col-span-2 rounded-2xl bg-surface-container-low/80 backdrop-blur-md p-space-md flex items-center justify-between shadow-md">
+<div class="flex items-center gap-space-sm">
+<div class="relative w-12 h-12 rounded-2xl bg-tertiary-container/20 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[26px]" style="font-variation-settings: 'FILL' 1;">spa</span>
+<span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-primary rounded-full ring-2 ring-surface"></span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block">Emoção Predominante</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Esperançoso &amp; Calmo</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Presente em 64% dos seus registros de humor</p>
+</div>
+</div>
+<div class="hidden sm:flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-primary">Harmônico</span>
+</div>
+</div>
+</section>
+<!-- Therapeutic Smart Pattern Card -->
+<section class="w-full rounded-2xl bg-surface-container-low/95 p-margin shadow-lg relative overflow-hidden flex flex-col space-y-space-sm">
+<!-- Subtle Amber Glow Line Indicator -->
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-tertiary via-primary to-transparent"></div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-lg bg-tertiary-container/20 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[17px]">psychology_alt</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Padrões Identificados</h4>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-tertiary font-label-sm text-label-sm font-semibold">
+        IA Clínica
+      </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+      Você tende a se sentir mais <strong class="text-tertiary font-medium">sobrecarregado nas tardes de terça-feira</strong>. Suas práticas de respiração somática reduziram a intensidade desse estado em <strong class="text-primary font-semibold">40%</strong>.
+    </p>
+<!-- Contextual micro-action -->
+<div class="pt-1 flex items-center justify-between">
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-primary">verified</span>
+<span>Recomendação: Pré-programar pausa às 14h30</span>
+</div>
+<button class="py-1 px-3 rounded-full bg-primary/10 hover:bg-primary/20 text-primary font-label-sm text-label-sm font-semibold transition-all" type="button">
+        Agendar
+      </button>
+</div>
+</section>
+<!-- Somatic Resonance Visual Gallery (Delight Factor) -->
+<section class="flex flex-col space-y-2.5">
+<div class="flex items-center justify-between">
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Rituais de Recomposição</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Baseado nos seus dados</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm">
+<!-- Ritual Item 1 -->
+<div class="group relative rounded-2xl overflow-hidden bg-surface-container-low shadow-md cursor-pointer active:scale-98 transition-transform">
+<div class="relative w-full h-28 bg-cover bg-center" data-alt="Serene therapeutic room with soft diffused emerald and warm amber lighting, green indoor botanical plants, peaceful zen meditation cushion on smooth slate floor, hyper-realistic, tranquil shelter atmosphere" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCX-gY2Q0m2v9hL8G6tL1ArOADMDSOCzq9-RmfiQ0qTKZuzmzzAGqp9js_diXwRRY90-crSc9scspsqh6Cfu9OFc70p9yugYvg3NNYpA7V_tKsYEUGfQ__4I_eQmQmRfHYxSfo1lBqxQn0Ng4g-_QYndiOT8VrXl67CI5PCHafgv_Ksk8lDbebQScwPbJoK9O6dMvJQuY7UA4ZS7nXwEi7DLBBHEcQKFJAIeAlcSgX6')">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/40 to-transparent"></div>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-surface-container-lowest/80 backdrop-blur-md text-primary font-label-sm text-label-sm">4-7-8 Respiração</span>
+</div>
+<div class="p-2.5 flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold truncate">Alívio de Terça</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">5 min • Somático</span>
+</div>
+</div>
+<!-- Ritual Item 2 -->
+<div class="group relative rounded-2xl overflow-hidden bg-surface-container-low shadow-md cursor-pointer active:scale-98 transition-transform">
+<div class="relative w-full h-28 bg-cover bg-center" data-alt="Gentle misty morning lake reflection with soft ripples, serene botanical forest background in deep slate obsidian and mint green tones, peaceful calming atmosphere, artistic studio photography" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD_OxWB3HEyWg8l3hBNgXFnsNH31rNAGIQiDDfodZWxpx_RLD0ZWnPIYSiHdaswkfTLWySfVnT29zS_qVVuUS_WveaJZVNjS2Ho8rKKJXSuI-Gqk3yM3jnyfOoXATcb4DI-b-DiKoLE3t0-3xUtBev00BZUC6rWXmKUVQhYwk3YQXEMQt6Uw3lhS8o5g6PeCROoIbPJtDEGxuYIBql84k29AR_Pq4E1Qr3ZX-MUUDt4')">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/40 to-transparent"></div>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-surface-container-lowest/80 backdrop-blur-md text-tertiary font-label-sm text-label-sm">Descompressão</span>
+</div>
+<div class="p-2.5 flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold truncate">Pausa da Tarde</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">7 min • Guiado</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<script>
+  function switchPeriod(period) {
+    const tab7 = document.getElementById('tab-7d');
+    const tab30 = document.getElementById('tab-30d');
+    const tabAll = document.getElementById('tab-all');
+    const curve = document.getElementById('graph-curve');
+    const feedback = document.getElementById('graph-feedback');
+
+    const tabs = [tab7, tab30, tabAll];
+    tabs.forEach(t => {
+      t.className = "flex-1 py-1.5 px-3 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all duration-300 text-center";
+    });
+
+    if (period === '7d') {
+      tab7.className = "flex-1 py-1.5 px-3 rounded-full font-label-md text-label-md text-on-primary bg-primary transition-all duration-300 text-center shadow-sm";
+      curve.setAttribute('d', 'M 15 85 C 45 60, 60 105, 95 98 C 130 92, 145 42, 180 48 C 215 54, 230 75, 265 30 C 300 -10, 315 22, 330 20');
+      feedback.innerHTML = '<div class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px] text-tertiary">flare</span><span>Pico emocional registrado no <strong>Sábado</strong> após respiração guiada.</span></div><span class="material-symbols-outlined text-[16px] text-primary">arrow_forward_ios</span>';
+    } else if (period === '30d') {
+      tab30.className = "flex-1 py-1.5 px-3 rounded-full font-label-md text-label-md text-on-primary bg-primary transition-all duration-300 text-center shadow-sm";
+      curve.setAttribute('d', 'M 15 65 C 50 85, 80 40, 120 50 C 160 60, 200 35, 240 45 C 280 55, 305 25, 330 35');
+      feedback.innerHTML = '<div class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px] text-primary">trending_up</span><span>Tendência de <strong>alta contínua</strong> de serenidade nos últimos 30 dias.</span></div><span class="material-symbols-outlined text-[16px] text-primary">arrow_forward_ios</span>';
+    } else {
+      tabAll.className = "flex-1 py-1.5 px-3 rounded-full font-label-md text-label-md text-on-primary bg-primary transition-all duration-300 text-center shadow-sm";
+      curve.setAttribute('d', 'M 15 110 C 60 90, 100 70, 150 60 C 200 50, 250 40, 330 25');
+      feedback.innerHTML = '<div class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px] text-secondary">psychology</span><span>Evolução consistente desde a adesão ao Froid Care (+38% global).</span></div><span class="material-symbols-outlined text-[16px] text-primary">arrow_forward_ios</span>';
+    }
+  }
+
+  function showTip(day, text) {
+    const feedback = document.getElementById('graph-feedback');
+    feedback.innerHTML = '<div class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px] text-primary">info</span><span><strong>' + day + ':</strong> ' + text + '</span></div><span class="material-symbols-outlined text-[16px] text-primary">check</span>';
+  }
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/85 backdrop-blur-xl shadow-[0_-2px_16px_rgba(0,0,0,0.35)]" data-active-classes="text-primary font-semibold"><div class="h-20 px-gutter flex items-center justify-around"><a aria-label="Início" class="min-w-[44px] min-h-[44px] py-1 px-2 flex flex-col items-center justify-center gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors rounded-xl" data-path="inicio" href="#"><span class="material-symbols-outlined text-[24px]">home</span><span class="font-label-sm text-label-sm">Início</span></a><a aria-label="Acolhimento" class="min-w-[44px] min-h-[44px] py-1 px-2 flex flex-col items-center justify-center gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors rounded-xl" data-path="acolhimento" href="#"><span class="material-symbols-outlined text-[24px]">favorite</span><span class="font-label-sm text-label-sm">Acolhimento</span></a><a aria-label="Diário" class="min-w-[44px] min-h-[44px] py-1 px-2 flex flex-col items-center justify-center gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors rounded-xl" data-path="diario" href="#"><span class="material-symbols-outlined text-[24px]">edit_note</span><span class="font-label-sm text-label-sm">Diário</span></a><a aria-current="page" aria-label="Progresso" class="min-w-[44px] min-h-[44px] py-1 px-2 flex flex-col items-center justify-center gap-0.5 transition-colors rounded-xl text-primary font-semibold" data-path="progresso" href="#"><span class="material-symbols-outlined text-[24px]">insights</span><span class="font-label-sm text-label-sm">Progresso</span></a><a aria-label="Relatórios" class="min-w-[44px] min-h-[44px] py-1 px-2 flex flex-col items-center justify-center gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors rounded-xl" data-path="relatorios" href="#"><span class="material-symbols-outlined text-[24px]">clinical_notes</span><span class="font-label-sm text-label-sm">Relatórios</span></a></div></nav></body></html>

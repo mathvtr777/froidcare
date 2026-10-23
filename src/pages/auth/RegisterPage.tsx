@@ -51,29 +51,29 @@ export const RegisterPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center p-4 bg-charcoal-950">
+    <div className="min-h-screen w-full flex items-center justify-center p-4 bg-surface text-on-surface">
       <div className="w-full max-w-md space-y-6">
         {/* Brand header */}
         <div className="text-center space-y-2">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-sage-950 border border-sage-800/80 mb-2">
-            <span className="text-sage-400 font-bold text-xl">F</span>
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-primary/15 border border-primary/30 text-primary font-bold text-xl mb-2 shadow-sm">
+            F
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-neutral-100">
+          <h1 className="font-headline-lg text-headline-lg font-bold tracking-tight text-on-surface">
             Froid Care
           </h1>
-          <p className="text-sm text-neutral-400">
-            Cadastre-se para iniciar seu acompanhamento pessoal.
+          <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Cadastre-se para iniciar seu refúgio de acolhimento pessoal.
           </p>
         </div>
 
         {/* Card Form */}
-        <div className="rounded-2xl bg-charcoal-900 border border-charcoal-800 p-6 md:p-8 shadow-xl space-y-5">
-          <h2 className="text-lg font-semibold text-neutral-200">
+        <div className="rounded-2xl bg-surface-container border border-outline-variant/40 p-6 md:p-8 shadow-xl space-y-5">
+          <h2 className="font-headline-sm text-headline-sm text-on-surface font-semibold">
             Criar conta
           </h2>
 
           {error && (
-            <div className="p-3 rounded-xl bg-rose-950/40 border border-rose-900/60 text-xs text-rose-300">
+            <div className="p-3 rounded-xl bg-error-container/30 border border-error/40 text-xs text-error">
               {error}
             </div>
           )}
@@ -81,7 +81,7 @@ export const RegisterPage: React.FC = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input
               label="Como deseja ser chamado(a)? (opcional)"
-              placeholder="Ex: Matheus"
+              placeholder="Ex: Matheus ou apelido"
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
               helperText="Usado apenas para saudações discretas no aplicativo."
@@ -119,7 +119,7 @@ export const RegisterPage: React.FC = () => {
 
             <Button
               type="submit"
-              className="w-full mt-2"
+              className="w-full mt-2 font-semibold"
               isLoading={loading}
             >
               Criar conta e continuar
@@ -129,23 +129,22 @@ export const RegisterPage: React.FC = () => {
         </div>
 
         {/* Login prompt */}
-        <div className="text-center text-xs text-neutral-400">
+        <div className="text-center text-xs text-on-surface-variant">
           Já possui cadastro?{' '}
           <Link
             to="/login"
-            className="text-sage-400 hover:text-sage-300 font-medium hover:underline"
+            className="text-primary hover:underline font-semibold"
           >
             Acessar conta existente
           </Link>
         </div>
 
         {/* Minimal privacy notice */}
-        <div className="flex items-center justify-center gap-1.5 text-[11px] text-neutral-500 text-center">
-          <ShieldCheck className="w-3.5 h-3.5 text-sage-600" />
-          <span>Privacidade por padrão: não exigimos histórico de saúde nem dados clínicos.</span>
+        <div className="flex items-center justify-center gap-1.5 text-[11px] text-on-surface-variant text-center">
+          <ShieldCheck className="w-3.5 h-3.5 text-primary" />
+          <span>Privacidade por padrão: não exigimos dados clínicos ou diagnósticos.</span>
         </div>
       </div>
     </div>
   );
 };
-

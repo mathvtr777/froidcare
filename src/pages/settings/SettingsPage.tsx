@@ -7,17 +7,7 @@ import { Reminder } from '../../types';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
 import { ConfirmDialog } from '../../components/ui/ConfirmDialog';
-import {
-  User,
-  Bell,
-  Sliders,
-  Shield,
-  Download,
-  Trash2,
-  LogOut,
-  Check,
-  Clock,
-} from 'lucide-react';
+import { Check } from 'lucide-react';
 
 export const SettingsPage: React.FC = () => {
   const { user, signOut, updateDisplayName } = useAuth();
@@ -31,7 +21,6 @@ export const SettingsPage: React.FC = () => {
   // Reminders state
   const [reminders, setReminders] = useState<Reminder[]>([]);
   const [newReminderTime, setNewReminderTime] = useState('20:00');
-  const [newReminderDays] = useState<number[]>([1, 2, 3, 4, 5]); // Seg-Sex
   const [reminderSaving, setReminderSaving] = useState(false);
   const [notificationPermission, setNotificationPermission] = useState<string>('default');
 
@@ -90,7 +79,7 @@ export const SettingsPage: React.FC = () => {
     try {
       await remindersService.saveReminder(user.id, {
         time_of_day: newReminderTime,
-        days_of_week: newReminderDays,
+        days_of_week: [1, 2, 3, 4, 5],
         is_enabled: true,
         label: 'Momento de check-in pessoal',
       });
@@ -148,33 +137,33 @@ export const SettingsPage: React.FC = () => {
   const weekdayLabels = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
 
   return (
-    <div className="space-y-8 max-w-4xl">
+    <div className="flex flex-col w-full pb-8 space-y-6">
       {/* Header */}
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight text-neutral-100">
+      <div className="pt-1">
+        <h1 className="font-headline-lg text-headline-lg text-on-surface tracking-tight font-bold">
           Configurações e Privacidade
         </h1>
-        <p className="text-sm text-neutral-400">
+        <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
           Gerencie seus dados pessoais, preferências de uso e controle total da sua conta.
         </p>
       </div>
 
       {actionMessage && (
-        <div className="p-3.5 rounded-xl bg-sage-950/80 border border-sage-800 text-xs text-sage-300 font-medium">
+        <div className="p-3.5 rounded-2xl bg-primary-container/20 border border-primary/30 text-xs text-primary font-semibold">
           {actionMessage}
         </div>
       )}
 
       {/* 1. Account Profile */}
-      <div className="p-5 md:p-6 rounded-2xl bg-charcoal-900 border border-charcoal-800 space-y-4">
-        <div className="flex items-center gap-2.5 pb-2 border-b border-charcoal-800">
-          <User className="w-5 h-5 text-sage-400" />
-          <h2 className="text-base font-semibold text-neutral-100">Dados da Conta</h2>
+      <div className="p-space-md rounded-2xl bg-surface-container border border-outline-variant/40 space-y-4 shadow-sm">
+        <div className="flex items-center gap-2.5 pb-2 border-b border-surface-container-high/60">
+          <span className="material-symbols-outlined text-[22px] text-primary">person</span>
+          <h2 className="font-headline-sm text-headline-sm text-on-surface font-semibold">Dados da Conta</h2>
         </div>
 
-        <div className="text-xs text-neutral-400">
-          <span className="block font-medium text-neutral-300">E-mail associado:</span>
-          <span className="text-neutral-200 font-mono">{user?.email || 'Visitante local'}</span>
+        <div className="text-xs text-on-surface-variant">
+          <span className="block font-semibold text-on-surface">E-mail associado:</span>
+          <span className="text-primary font-mono text-xs">{user?.email || 'Visitante local'}</span>
         </div>
 
         <form onSubmit={handleSaveName} className="space-y-3 max-w-md pt-1">
@@ -190,7 +179,7 @@ export const SettingsPage: React.FC = () => {
               Salvar alteração
             </Button>
             {nameSuccess && (
-              <span className="inline-flex items-center gap-1 text-xs text-sage-400 font-medium">
+              <span className="inline-flex items-center gap-1 text-xs text-primary font-semibold">
                 <Check className="w-4 h-4" /> Nome atualizado com sucesso
               </span>
             )}
@@ -199,18 +188,18 @@ export const SettingsPage: React.FC = () => {
       </div>
 
       {/* 2. Interface Preferences */}
-      <div className="p-5 md:p-6 rounded-2xl bg-charcoal-900 border border-charcoal-800 space-y-4">
-        <div className="flex items-center gap-2.5 pb-2 border-b border-charcoal-800">
-          <Sliders className="w-5 h-5 text-sage-400" />
-          <h2 className="text-base font-semibold text-neutral-100">Preferências de Interface</h2>
+      <div className="p-space-md rounded-2xl bg-surface-container border border-outline-variant/40 space-y-4 shadow-sm">
+        <div className="flex items-center gap-2.5 pb-2 border-b border-surface-container-high/60">
+          <span className="material-symbols-outlined text-[22px] text-primary">tune</span>
+          <h2 className="font-headline-sm text-headline-sm text-on-surface font-semibold">Preferências de Interface</h2>
         </div>
 
-        <div className="flex items-center justify-between gap-4 p-3 rounded-xl bg-charcoal-850 border border-charcoal-800">
+        <div className="flex items-center justify-between gap-4 p-3.5 rounded-xl bg-surface-container-low border border-outline-variant/30">
           <div className="space-y-0.5">
-            <span className="text-xs font-medium text-neutral-200 block">
+            <span className="text-xs font-semibold text-on-surface block">
               Reduzir movimentos e animações visuais
             </span>
-            <span className="text-[11px] text-neutral-400 block">
+            <span className="text-[11px] text-on-surface-variant block leading-relaxed">
               Desativa animações de respiração e transições para quem prefere uma interface estática.
             </span>
           </div>
@@ -221,7 +210,7 @@ export const SettingsPage: React.FC = () => {
             aria-checked={reducedMotion}
             onClick={handleToggleReducedMotion}
             className={`w-11 h-6 rounded-full transition-colors p-0.5 focus:outline-none shrink-0 ${
-              reducedMotion ? 'bg-sage-600' : 'bg-charcoal-700'
+              reducedMotion ? 'bg-primary' : 'bg-surface-variant'
             }`}
           >
             <div
@@ -234,11 +223,11 @@ export const SettingsPage: React.FC = () => {
       </div>
 
       {/* 3. Gentle Reminders */}
-      <div className="p-5 md:p-6 rounded-2xl bg-charcoal-900 border border-charcoal-800 space-y-4">
-        <div className="flex items-center justify-between pb-2 border-b border-charcoal-800">
+      <div className="p-space-md rounded-2xl bg-surface-container border border-outline-variant/40 space-y-4 shadow-sm">
+        <div className="flex items-center justify-between pb-2 border-b border-surface-container-high/60">
           <div className="flex items-center gap-2.5">
-            <Bell className="w-5 h-5 text-sage-400" />
-            <h2 className="text-base font-semibold text-neutral-100">Lembretes Pessoais Opcionais</h2>
+            <span className="material-symbols-outlined text-[22px] text-primary">notifications</span>
+            <h2 className="font-headline-sm text-headline-sm text-on-surface font-semibold">Lembretes Pessoais Opcionais</h2>
           </div>
 
           {notificationPermission !== 'granted' && (
@@ -253,24 +242,24 @@ export const SettingsPage: React.FC = () => {
           )}
         </div>
 
-        <p className="text-xs text-neutral-400 leading-relaxed">
-          Defina horários convenientes para um momento de pausa. O Froid Care não envia mensagens
+        <p className="text-xs text-on-surface-variant leading-relaxed">
+          Defina horários convenientes para um momento de pausa. O Froid Care não envia notificações
           insistentes nem expõe seu estado emocional em telas bloqueadas.
         </p>
 
-        {/* Existing reminders list */}
+        {/* Existing reminders */}
         {reminders.length > 0 && (
           <div className="space-y-2">
             {reminders.map((rem) => (
               <div
                 key={rem.id}
-                className="p-3 rounded-xl bg-charcoal-850 border border-charcoal-800 flex items-center justify-between"
+                className="p-3 rounded-xl bg-surface-container-low border border-outline-variant/30 flex items-center justify-between"
               >
                 <div className="flex items-center gap-3">
-                  <Clock className="w-4 h-4 text-sage-400" />
+                  <span className="material-symbols-outlined text-[18px] text-primary">schedule</span>
                   <div>
-                    <span className="text-xs font-semibold text-neutral-200">{rem.time_of_day}</span>
-                    <span className="text-[11px] text-neutral-400 ml-2">
+                    <span className="text-xs font-semibold text-on-surface font-mono">{rem.time_of_day}</span>
+                    <span className="text-[11px] text-on-surface-variant ml-2">
                       ({rem.days_of_week.map((d) => weekdayLabels[d]).join(', ')})
                     </span>
                   </div>
@@ -278,7 +267,7 @@ export const SettingsPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => handleDeleteReminder(rem.id)}
-                  className="text-xs text-rose-400 hover:text-rose-300"
+                  className="text-xs text-error hover:underline font-semibold"
                 >
                   Remover
                 </button>
@@ -290,12 +279,12 @@ export const SettingsPage: React.FC = () => {
         {/* Add reminder controls */}
         <div className="pt-2 flex flex-col sm:flex-row sm:items-center gap-3">
           <div className="flex items-center gap-2">
-            <span className="text-xs text-neutral-400">Horário:</span>
+            <span className="text-xs text-on-surface-variant font-semibold">Horário:</span>
             <input
               type="time"
               value={newReminderTime}
               onChange={(e) => setNewReminderTime(e.target.value)}
-              className="px-2.5 py-1.5 rounded-lg bg-charcoal-950 border border-charcoal-800 text-xs text-neutral-200"
+              className="px-3 py-1.5 rounded-xl bg-surface-container-low text-on-surface border border-outline-variant/40 text-xs font-mono"
             />
           </div>
 
@@ -311,23 +300,23 @@ export const SettingsPage: React.FC = () => {
       </div>
 
       {/* 4. Data Control & LGPD */}
-      <div className="p-5 md:p-6 rounded-2xl bg-charcoal-900 border border-charcoal-800 space-y-5">
-        <div className="flex items-center gap-2.5 pb-2 border-b border-charcoal-800">
-          <Shield className="w-5 h-5 text-sage-400" />
-          <h2 className="text-base font-semibold text-neutral-100">
+      <div className="p-space-md rounded-2xl bg-surface-container border border-outline-variant/40 space-y-4 shadow-sm">
+        <div className="flex items-center gap-2.5 pb-2 border-b border-surface-container-high/60">
+          <span className="material-symbols-outlined text-[22px] text-primary">verified_user</span>
+          <h2 className="font-headline-sm text-headline-sm text-on-surface font-semibold">
             Privacidade, Dados e LGPD
           </h2>
         </div>
 
-        <div className="p-3.5 rounded-xl bg-charcoal-850 border border-charcoal-750 text-xs text-neutral-300 space-y-2 leading-relaxed">
-          <p className="font-semibold text-neutral-200">
+        <div className="p-3.5 rounded-xl bg-surface-container-low border border-outline-variant/30 text-xs text-on-surface space-y-2 leading-relaxed">
+          <p className="font-semibold text-primary">
             Seus direitos como titular de dados:
           </p>
-          <ul className="list-disc pl-4 space-y-1 text-neutral-400">
-            <li>Seus registros pertencem exclusivamente a você e não são utilizados para publicidade.</li>
-            <li>No banco de dados Supabase, todas as tabelas utilizam Row Level Security (RLS) estrito.</li>
-            <li>Você pode exportar integralmente seu histórico a qualquer momento em formato aberto (JSON).</li>
-            <li>Você tem o direito de apagar todos os registros ou excluir sua conta de forma irrevogável.</li>
+          <ul className="list-disc pl-4 space-y-1 text-on-surface-variant">
+            <li>Seus registros pertencem exclusivamente a você e não são comercializados ou usados para anúncios.</li>
+            <li>No banco de dados Supabase, todas as tabelas contam com Row Level Security (RLS) estrito.</li>
+            <li>Você pode exportar integralmente seus dados a qualquer momento em formato aberto (JSON).</li>
+            <li>Você tem o direito de apagar todos os registros ou solicitar a exclusão total da conta.</li>
           </ul>
         </div>
 
@@ -337,7 +326,7 @@ export const SettingsPage: React.FC = () => {
             size="sm"
             onClick={handleExportDataJson}
           >
-            <Download className="w-4 h-4 mr-1.5" />
+            <span className="material-symbols-outlined text-[18px] mr-1.5 text-primary">download</span>
             Exportar Meus Dados (JSON)
           </Button>
 
@@ -346,19 +335,19 @@ export const SettingsPage: React.FC = () => {
             size="sm"
             onClick={() => setDeleteRecordsModal(true)}
           >
-            <Trash2 className="w-4 h-4 mr-1.5" />
+            <span className="material-symbols-outlined text-[18px] mr-1.5">delete_forever</span>
             Excluir Todos os Registros
           </Button>
         </div>
       </div>
 
       {/* 5. Account Sign Out & Deletion */}
-      <div className="p-5 md:p-6 rounded-2xl bg-charcoal-900 border border-charcoal-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="p-space-md rounded-2xl bg-surface-container border border-outline-variant/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
         <div>
-          <h3 className="text-sm font-semibold text-neutral-200">
+          <h3 className="font-label-lg text-label-lg text-on-surface font-semibold">
             Sessão e Encerramento
           </h3>
-          <p className="text-xs text-neutral-400">
+          <p className="text-xs text-on-surface-variant">
             Desconectar deste dispositivo ou encerrar permanentemente sua conta.
           </p>
         </div>
@@ -368,9 +357,8 @@ export const SettingsPage: React.FC = () => {
             variant="ghost"
             size="sm"
             onClick={() => signOut()}
-            className="text-neutral-300 hover:text-white"
           >
-            <LogOut className="w-4 h-4 mr-1.5" />
+            <span className="material-symbols-outlined text-[18px] mr-1.5">logout</span>
             Sair da Conta
           </Button>
 
@@ -384,7 +372,7 @@ export const SettingsPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Confirmation Modals */}
+      {/* Modals */}
       <ConfirmDialog
         isOpen={deleteRecordsModal}
         onClose={() => setDeleteRecordsModal(false)}

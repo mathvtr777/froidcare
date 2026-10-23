@@ -9,6 +9,7 @@ import { EmotionalRecord, EmotionalRecordInput } from '../../types';
 import { recordsService } from '../../services/recordsService';
 import { useAuth } from '../../contexts/AuthContext';
 import { format } from 'date-fns';
+import { Tag } from 'lucide-react';
 
 export interface DiaryRecordModalProps {
   isOpen: boolean;
@@ -25,7 +26,6 @@ export const DiaryRecordModal: React.FC<DiaryRecordModalProps> = ({
 }) => {
   const { user } = useAuth();
 
-  // Format local date for datetime-local input: 'YYYY-MM-DDTHH:mm'
   const getInitialDateTime = (isoString?: string) => {
     const d = isoString ? new Date(isoString) : new Date();
     return format(d, "yyyy-MM-dd'T'HH:mm");
@@ -103,7 +103,6 @@ export const DiaryRecordModal: React.FC<DiaryRecordModalProps> = ({
     setLoading(true);
 
     try {
-      // Convert datetime-local to ISO preserving local moment
       const timestampIso = new Date(dateTimeLocal).toISOString();
 
       const input: EmotionalRecordInput = {
@@ -144,7 +143,7 @@ export const DiaryRecordModal: React.FC<DiaryRecordModalProps> = ({
     >
       <div className="space-y-6 text-sm">
         {error && (
-          <div className="p-3 rounded-xl bg-rose-950/40 border border-rose-900/60 text-xs text-rose-300">
+          <div className="p-3 rounded-xl bg-error-container/30 border border-error/40 text-xs text-error">
             {error}
           </div>
         )}
@@ -160,13 +159,13 @@ export const DiaryRecordModal: React.FC<DiaryRecordModalProps> = ({
           />
 
           <div>
-            <label className="block text-xs font-medium text-neutral-300 mb-1.5">
+            <label className="block text-xs font-semibold text-on-surface mb-1.5">
               Atividade realizada (opcional)
             </label>
             <select
               value={activityUsed}
               onChange={(e) => setActivityUsed(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-charcoal-900 border border-charcoal-700/80 text-neutral-100 text-sm focus:outline-none focus:border-sage-500"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-surface-container border border-outline-variant/60 text-on-surface text-sm focus:outline-none focus:bg-surface-container-high focus:border-primary"
             >
               <option value="">Nenhuma atividade específica</option>
               {EXERCISES.map((ex) => (
@@ -180,8 +179,8 @@ export const DiaryRecordModal: React.FC<DiaryRecordModalProps> = ({
 
         {/* Primary Emotion Selector */}
         <div className="space-y-2">
-          <label className="block text-xs font-medium text-neutral-300">
-            Emoção principal <span className="text-sage-400">*</span>
+          <label className="block text-xs font-semibold text-on-surface">
+            Emoção principal <span className="text-primary">*</span>
           </label>
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
             {EMOTIONS.map((emo) => {
@@ -194,10 +193,10 @@ export const DiaryRecordModal: React.FC<DiaryRecordModalProps> = ({
                     setPrimaryEmotion(emo.id);
                     setSecondaryEmotions((prev) => prev.filter((id) => id !== emo.id));
                   }}
-                  className={`p-2.5 rounded-xl border text-center transition-all ${
+                  className={`p-3 rounded-2xl border text-center transition-all ${
                     isSelected
-                      ? 'border-sage-500 bg-sage-950 text-white font-medium shadow-sm'
-                      : 'border-charcoal-700/80 bg-charcoal-850 hover:border-charcoal-600 text-neutral-300'
+                      ? 'border-primary bg-primary/10 text-on-surface font-semibold shadow-sm'
+                      : 'border-outline-variant/60 bg-surface-container hover:bg-surface-container-high text-on-surface-variant'
                   }`}
                 >
                   <span className="text-xs block truncate">{emo.label}</span>
@@ -209,7 +208,7 @@ export const DiaryRecordModal: React.FC<DiaryRecordModalProps> = ({
 
         {/* Secondary emotions (optional) */}
         <div className="space-y-1.5">
-          <label className="block text-xs font-medium text-neutral-400">
+          <label className="block text-xs font-semibold text-on-surface-variant">
             Outras sensações presentes em conjunto (opcional)
           </label>
           <div className="flex flex-wrap gap-1.5">
@@ -220,10 +219,10 @@ export const DiaryRecordModal: React.FC<DiaryRecordModalProps> = ({
                   type="button"
                   key={emo.id}
                   onClick={() => toggleSecondaryEmotion(emo.id)}
-                  className={`px-2.5 py-1 rounded-lg text-xs transition-colors border ${
+                  className={`px-3 py-1 rounded-full text-xs transition-colors border ${
                     isSelected
-                      ? 'bg-charcoal-700 border-charcoal-500 text-neutral-100'
-                      : 'bg-charcoal-850 border-charcoal-800 text-neutral-400 hover:text-neutral-200'
+                      ? 'bg-surface-container-high border-primary/40 text-primary font-medium'
+                      : 'bg-surface-container border-outline-variant/60 text-on-surface-variant hover:text-on-surface'
                   }`}
                 >
                   {emo.label}
@@ -242,16 +241,16 @@ export const DiaryRecordModal: React.FC<DiaryRecordModalProps> = ({
 
         {/* Post intensity if activity was used */}
         {activityUsed && (
-          <div className="p-3.5 rounded-xl bg-charcoal-850 border border-charcoal-750 space-y-3">
+          <div className="p-4 rounded-2xl bg-surface-container border border-outline-variant/60 space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-neutral-200">
+              <span className="text-xs font-semibold text-on-surface">
                 Registrou mudança após a atividade?
               </span>
               {postIntensity !== null && (
                 <button
                   type="button"
                   onClick={() => setPostIntensity(null)}
-                  className="text-[11px] text-neutral-400 hover:text-neutral-200"
+                  className="text-[11px] text-on-surface-variant hover:text-on-surface"
                 >
                   Limpar
                 </button>
@@ -275,7 +274,7 @@ export const DiaryRecordModal: React.FC<DiaryRecordModalProps> = ({
 
         {/* Triggers Tags */}
         <div className="space-y-2">
-          <label className="block text-xs font-medium text-neutral-300">
+          <label className="block text-xs font-semibold text-on-surface">
             Fatores ou gatilhos identificados (opcional)
           </label>
           <div className="flex flex-wrap gap-1.5">
@@ -286,12 +285,13 @@ export const DiaryRecordModal: React.FC<DiaryRecordModalProps> = ({
                   type="button"
                   key={trig}
                   onClick={() => toggleTrigger(trig)}
-                  className={`px-2.5 py-1 rounded-lg text-xs transition-colors border ${
+                  className={`px-3 py-1 rounded-full text-xs transition-colors border flex items-center gap-1 ${
                     active
-                      ? 'bg-sage-950 border-sage-700 text-sage-300'
-                      : 'bg-charcoal-850 border-charcoal-800 text-neutral-400 hover:text-neutral-200'
+                      ? 'bg-primary-container/20 border-primary/40 text-primary font-medium'
+                      : 'bg-surface-container border-outline-variant/60 text-on-surface-variant hover:text-on-surface'
                   }`}
                 >
+                  <Tag className="w-2.5 h-2.5" />
                   {trig}
                 </button>
               );
@@ -303,13 +303,13 @@ export const DiaryRecordModal: React.FC<DiaryRecordModalProps> = ({
             value={customTriggerInput}
             onChange={(e) => setCustomTriggerInput(e.target.value)}
             onKeyDown={handleAddCustomTrigger}
-            className="w-full px-3 py-1.5 rounded-lg bg-charcoal-900 border border-charcoal-800 text-xs text-neutral-200 placeholder-neutral-500 focus:outline-none focus:border-sage-500"
+            className="w-full px-3.5 py-2 rounded-xl bg-surface-container border border-outline-variant/60 text-xs text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-high focus:border-primary"
           />
         </div>
 
         {/* Sleep quality perception (1-5) */}
         <div className="space-y-1.5">
-          <label className="block text-xs font-medium text-neutral-300">
+          <label className="block text-xs font-semibold text-on-surface">
             Percepção da qualidade do sono recente (opcional)
           </label>
           <div className="flex items-center gap-2">
@@ -321,10 +321,10 @@ export const DiaryRecordModal: React.FC<DiaryRecordModalProps> = ({
                   type="button"
                   key={val}
                   onClick={() => setSleepQuality(sleepQuality === val ? null : val)}
-                  className={`flex-1 py-2 px-1 text-center rounded-xl border text-xs transition-colors ${
+                  className={`flex-1 py-2 px-1 text-center rounded-2xl border text-xs transition-all ${
                     isSelected
-                      ? 'border-sage-600 bg-sage-950/70 text-sage-300 font-semibold'
-                      : 'border-charcoal-800 bg-charcoal-850 text-neutral-400 hover:text-neutral-200'
+                      ? 'border-primary bg-primary/10 text-primary font-bold'
+                      : 'border-outline-variant/60 bg-surface-container text-on-surface-variant hover:text-on-surface'
                   }`}
                   title={labels[val - 1]}
                 >
@@ -339,14 +339,14 @@ export const DiaryRecordModal: React.FC<DiaryRecordModalProps> = ({
         {/* Free notes */}
         <Textarea
           label="Anotações livres (opcional)"
-          placeholder="Espaço aberto para expressar pensamentos, sensações físicas, insights..."
+          placeholder="Espaço aberto para expressar pensamentos, sensações físicas, reflexões..."
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
           maxLength={3000}
         />
 
         {/* Footer actions */}
-        <div className="pt-3 flex items-center justify-end gap-3 border-t border-charcoal-800">
+        <div className="pt-3 flex items-center justify-end gap-3 border-t border-surface-container-high">
           <Button variant="ghost" size="sm" onClick={onClose} disabled={loading}>
             Cancelar
           </Button>

@@ -13,19 +13,29 @@ export interface CheckInModalProps {
   isOpen: boolean;
   onClose: () => void;
   onRecordCreated?: () => void;
+  initialEmotion?: string;
 }
 
 export const CheckInModal: React.FC<CheckInModalProps> = ({
   isOpen,
   onClose,
   onRecordCreated,
+  initialEmotion = 'calma',
 }) => {
   const { user } = useAuth();
-  const [selectedEmotion, setSelectedEmotion] = useState<string>('calma');
+  const [selectedEmotion, setSelectedEmotion] = useState<string>(initialEmotion);
   const [intensity, setIntensity] = useState<number>(3);
   const [notes, setNotes] = useState<string>('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Sync initial emotion when modal opens
+  React.useEffect(() => {
+    if (isOpen) {
+      setSelectedEmotion(initialEmotion);
+      setError(null);
+    }
+  }, [isOpen, initialEmotion]);
 
   const handleSave = async () => {
     if (!user) return;
@@ -56,19 +66,19 @@ export const CheckInModal: React.FC<CheckInModalProps> = ({
       isOpen={isOpen}
       onClose={onClose}
       title="Como você está agora?"
-      description="Um registro breve para ouvir seu próprio estado, sem julgamentos."
+      description="Um registro breve para ouvir seu próprio estado, sem cobranças."
       maxWidth="md"
     >
       <div className="space-y-5">
         {error && (
-          <div className="p-3 rounded-xl bg-rose-950/40 border border-rose-900/60 text-xs text-rose-300">
+          <div className="p-3 rounded-xl bg-error-container/30 border border-error/40 text-xs text-error">
             {error}
           </div>
         )}
 
         {/* Emotion Selector Grid */}
         <div className="space-y-2">
-          <label className="block text-xs font-medium text-neutral-300">
+          <label className="block text-xs font-semibold text-on-surface">
             Qual emoção melhor descreve este momento?
           </label>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -79,14 +89,14 @@ export const CheckInModal: React.FC<CheckInModalProps> = ({
                   type="button"
                   key={emo.id}
                   onClick={() => setSelectedEmotion(emo.id)}
-                  className={`p-2.5 rounded-xl border text-left transition-all flex items-center justify-between ${
+                  className={`p-3 rounded-2xl border text-left transition-all flex items-center justify-between ${
                     isSelected
-                      ? 'border-sage-500 bg-sage-950/70 text-white font-medium'
-                      : 'border-charcoal-700/80 bg-charcoal-850 hover:border-charcoal-600 text-neutral-300'
+                      ? 'border-primary bg-primary/10 text-on-surface font-semibold shadow-sm'
+                      : 'border-outline-variant/60 bg-surface-container hover:bg-surface-container-high text-on-surface-variant'
                   }`}
                 >
                   <span className="text-xs truncate">{emo.label}</span>
-                  {isSelected && <Check className="w-3.5 h-3.5 text-sage-400 shrink-0" />}
+                  {isSelected && <Check className="w-3.5 h-3.5 text-primary shrink-0" />}
                 </button>
               );
             })}
@@ -102,7 +112,7 @@ export const CheckInModal: React.FC<CheckInModalProps> = ({
 
         {/* Optional Note */}
         <Textarea
-          label="Quer acrescentar alguma reflexão ou contexto? (opcional)"
+          label="Reflexão ou contexto adicional (opcional)"
           placeholder="Ex: Tive uma reunião densa agora há pouco, percebi os ombros tensos..."
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
@@ -110,7 +120,7 @@ export const CheckInModal: React.FC<CheckInModalProps> = ({
         />
 
         {/* Action buttons */}
-        <div className="pt-2 flex items-center justify-end gap-3 border-t border-charcoal-800">
+        <div className="pt-2 flex items-center justify-end gap-3 border-t border-surface-container-high">
           <Button variant="ghost" size="sm" onClick={onClose} disabled={loading}>
             Cancelar
           </Button>

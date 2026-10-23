@@ -57,7 +57,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClos
       description="Um momento curto e opcional para adaptar o espaço ao seu ritmo."
       maxWidth="md"
     >
-      <div className="space-y-5 text-sm">
+      <div className="space-y-5 text-sm text-on-surface">
         {/* Name Input */}
         <Input
           label="Como você prefere ser chamado(a)?"
@@ -69,10 +69,10 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClos
 
         {/* Exercise Preferences */}
         <div className="space-y-2">
-          <label className="block text-xs font-medium text-neutral-300">
+          <label className="block text-xs font-medium text-on-surface-variant">
             Quais tipos de apoio você prefere encontrar?
           </label>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             {[
               { id: 'all', label: 'Todos os tipos', desc: 'Respiração, sentidos, corpo e reflexão' },
               { id: 'calm', label: 'Mais respiratórios', desc: 'Foco no ritmo e pausas suaves' },
@@ -83,29 +83,29 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClos
                 type="button"
                 key={opt.id}
                 onClick={() => setExerciseMode(opt.id as any)}
-                className={`p-3 rounded-xl border text-left transition-all flex flex-col justify-between ${
+                className={`p-3.5 rounded-2xl border text-left transition-all flex flex-col justify-between ${
                   exerciseMode === opt.id
-                    ? 'border-sage-600 bg-sage-950/60 text-white'
-                    : 'border-charcoal-700/80 bg-charcoal-850 hover:border-charcoal-600 text-neutral-300'
+                    ? 'border-primary bg-primary/10 text-on-surface shadow-[0_0_12px_rgba(90,240,179,0.15)]'
+                    : 'border-outline-variant/60 bg-surface-container hover:border-outline-variant text-on-surface-variant'
                 }`}
               >
                 <div className="flex items-center justify-between w-full">
-                  <span className="font-medium text-xs text-neutral-200">{opt.label}</span>
-                  {exerciseMode === opt.id && <Check className="w-3.5 h-3.5 text-sage-400" />}
+                  <span className="font-semibold text-xs text-on-surface">{opt.label}</span>
+                  {exerciseMode === opt.id && <Check className="w-3.5 h-3.5 text-primary" />}
                 </div>
-                <span className="text-[11px] text-neutral-400 mt-1">{opt.desc}</span>
+                <span className="text-[11px] text-on-surface-variant mt-1">{opt.desc}</span>
               </button>
             ))}
           </div>
         </div>
 
         {/* Accessibility: Reduced motion toggle */}
-        <div className="p-3 rounded-xl bg-charcoal-850 border border-charcoal-700/80 flex items-center justify-between gap-3">
+        <div className="p-3.5 rounded-2xl bg-surface-container border border-outline-variant/60 flex items-center justify-between gap-3">
           <div className="space-y-0.5">
-            <span className="text-xs font-medium text-neutral-200 block">
+            <span className="text-xs font-semibold text-on-surface block">
               Reduzir animações visuais
             </span>
-            <span className="text-[11px] text-neutral-400 block">
+            <span className="text-[11px] text-on-surface-variant block">
               Ideal para quem prefere transições instantâneas sem movimento.
             </span>
           </div>
@@ -115,11 +115,11 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClos
             aria-checked={reducedMotion}
             onClick={() => setReducedMotion((prev) => !prev)}
             className={`w-11 h-6 rounded-full transition-colors p-0.5 focus:outline-none ${
-              reducedMotion ? 'bg-sage-600' : 'bg-charcoal-700'
+              reducedMotion ? 'bg-primary' : 'bg-surface-container-high'
             }`}
           >
             <div
-              className={`w-5 h-5 rounded-full bg-white transition-transform ${
+              className={`w-5 h-5 rounded-full bg-surface-container-lowest transition-transform ${
                 reducedMotion ? 'translate-x-5' : 'translate-x-0'
               }`}
             />
@@ -127,11 +127,11 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClos
         </div>
 
         {/* Actions */}
-        <div className="pt-2 flex items-center justify-between border-t border-charcoal-800">
+        <div className="pt-2 flex items-center justify-between border-t border-outline-variant/40">
           <Button variant="ghost" size="sm" onClick={handleSkip} disabled={saving}>
             Pular por enquanto
           </Button>
-          <Button size="sm" onClick={handleSave} isLoading={saving}>
+          <Button size="sm" onClick={handleSave} isLoading={saving} className="px-5">
             Concluir e iniciar
           </Button>
         </div>

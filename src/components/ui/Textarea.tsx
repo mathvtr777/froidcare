@@ -17,12 +17,12 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       <div className="w-full space-y-1.5">
         <div className="flex justify-between items-center">
           {label && (
-            <label htmlFor={inputId} className="block text-xs font-medium text-neutral-300">
+            <label htmlFor={inputId} className="block text-xs font-semibold text-on-surface">
               {label}
             </label>
           )}
           {maxLength && (
-            <span className="text-[11px] text-neutral-500">
+            <span className="text-[11px] text-on-surface-variant">
               {currentLength}/{maxLength}
             </span>
           )}
@@ -33,20 +33,19 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           value={value}
           maxLength={maxLength}
           className={cn(
-            'w-full px-3.5 py-2.5 rounded-xl bg-charcoal-900 border text-neutral-100 placeholder-neutral-500 text-sm transition-all focus:outline-none focus:ring-1 resize-y min-h-[90px]',
+            'w-full px-3.5 py-2.5 rounded-xl bg-surface-container text-on-surface placeholder:text-outline text-sm transition-colors focus:outline-none focus:bg-surface-container-high border resize-y min-h-[90px]',
             error
-              ? 'border-rose-500/80 focus:border-rose-500 focus:ring-rose-500/30'
-              : 'border-charcoal-700/80 focus:border-sage-500 focus:ring-sage-500/30 hover:border-charcoal-600',
+              ? 'border-error/80 focus:border-error focus:ring-1 focus:ring-error/30'
+              : 'border-outline-variant/60 focus:border-primary/80 focus:ring-1 focus:ring-primary/20 hover:border-outline',
             className
           )}
           {...props}
         />
-        {error && <p className="text-xs text-rose-400 mt-1">{error}</p>}
-        {!error && helperText && <p className="text-xs text-neutral-400 mt-1">{helperText}</p>}
+        {error && <p className="text-xs text-error mt-1">{error}</p>}
+        {!error && helperText && <p className="text-xs text-on-surface-variant mt-1">{helperText}</p>}
       </div>
     );
   }
 );
 
 Textarea.displayName = 'Textarea';
-

@@ -75,64 +75,67 @@ export const GroundingExercise: React.FC<GroundingExerciseProps> = ({
   };
 
   return (
-    <div className="space-y-6 text-neutral-100">
+    <div className="space-y-6 text-on-surface">
       {/* Header */}
-      <div className="flex items-center justify-between pb-3 border-b border-charcoal-800">
+      <div className="flex items-center justify-between pb-4 border-b border-outline-variant/40">
         <div>
-          <h3 className="text-base font-semibold text-neutral-100">
-            Aterramento Sensorial (5-4-3-2-1)
-          </h3>
-          <p className="text-xs text-neutral-400">
+          <div className="flex items-center gap-2 mb-1">
+            <span className="material-symbols-outlined text-primary text-xl">self_improvement</span>
+            <h3 className="text-base font-semibold text-on-surface">
+              Aterramento Sensorial (5-4-3-2-1)
+            </h3>
+          </div>
+          <p className="text-xs text-on-surface-variant">
             Conectando a atenção com os sentidos do momento presente.
           </p>
         </div>
         <button
           type="button"
           onClick={onExit}
-          className="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-charcoal-800"
+          className="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"
           aria-label="Encerrar exercício"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4" />
         </button>
       </div>
 
       {/* Steps progress indicator */}
-      <div className="flex items-center justify-between gap-1.5 px-2">
+      <div className="flex items-center justify-between gap-1.5 px-1">
         {STEPS.map((step, idx) => (
           <div
             key={step.count}
-            className={`flex-1 h-1.5 rounded-full transition-colors ${
+            className={`flex-1 h-1.5 rounded-full transition-all ${
               idx === currentStepIndex
-                ? 'bg-sage-500'
+                ? 'bg-primary shadow-[0_0_8px_rgba(90,240,179,0.5)]'
                 : idx < currentStepIndex
-                ? 'bg-sage-800'
-                : 'bg-charcoal-800'
+                ? 'bg-primary/40'
+                : 'bg-surface-container-high'
             }`}
           />
         ))}
       </div>
 
       {/* Main step content card */}
-      <div className="p-6 rounded-2xl bg-charcoal-900 border border-charcoal-800 space-y-4">
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-xl bg-sage-950/80 border border-sage-800/80 flex items-center justify-center text-sage-400">
+      <div className="p-6 rounded-3xl bg-surface-container-low border border-outline-variant/40 space-y-4">
+        <div className="flex items-center gap-3.5">
+          <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
             <Icon className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-sage-400">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-primary">
               Etapa {currentStepIndex + 1} de {STEPS.length}
             </span>
-            <h4 className="text-base font-bold text-neutral-100">
+            <h4 className="text-base font-bold text-on-surface">
               {currentStep.title}
             </h4>
           </div>
         </div>
 
-        <p className="text-sm text-neutral-300 leading-relaxed">
+        <p className="text-sm text-on-surface-variant leading-relaxed">
           {currentStep.instruction}
         </p>
 
-        <p className="text-xs text-neutral-400 italic bg-charcoal-850 p-2.5 rounded-xl border border-charcoal-750">
+        <p className="text-xs text-secondary italic bg-surface-container p-3 rounded-2xl border border-outline-variant/30">
           {currentStep.examples}
         </p>
 
@@ -145,7 +148,7 @@ export const GroundingExercise: React.FC<GroundingExerciseProps> = ({
             onChange={(e) =>
               setNotesPerStep({ ...notesPerStep, [currentStepIndex]: e.target.value })
             }
-            className="w-full px-3 py-2 rounded-xl bg-charcoal-950 border border-charcoal-800 text-xs text-neutral-200 placeholder-neutral-500 focus:outline-none focus:border-sage-500"
+            className="w-full px-4 py-2.5 rounded-2xl bg-surface-container border border-outline-variant/60 text-xs text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:border-primary focus:bg-surface-container-high transition-colors"
           />
         </div>
       </div>
@@ -165,7 +168,7 @@ export const GroundingExercise: React.FC<GroundingExerciseProps> = ({
         <Button
           size="md"
           onClick={handleNext}
-          className="px-5 font-semibold"
+          className="px-6 font-semibold"
         >
           {currentStepIndex === STEPS.length - 1 ? (
             'Finalizar exercício'

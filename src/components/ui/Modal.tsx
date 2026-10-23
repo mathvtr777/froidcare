@@ -51,7 +51,7 @@ export const Modal: React.FC<ModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-charcoal-950/80 backdrop-blur-sm transition-opacity"
+        className="fixed inset-0 bg-surface-container-lowest/85 backdrop-blur-md transition-opacity"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -62,26 +62,26 @@ export const Modal: React.FC<ModalProps> = ({
         aria-modal="true"
         aria-labelledby={title ? 'modal-title' : undefined}
         className={cn(
-          'relative w-full rounded-2xl bg-charcoal-900 border border-charcoal-700/80 p-5 md:p-6 shadow-2xl z-10 my-8 transition-all max-h-[90vh] flex flex-col',
+          'relative w-full rounded-2xl bg-surface-container-low border border-outline-variant/60 p-5 md:p-6 shadow-2xl z-10 my-8 transition-all max-h-[90vh] flex flex-col',
           maxWidths[maxWidth]
         )}
       >
-        <div className="flex items-start justify-between pb-3 border-b border-charcoal-800">
+        <div className="flex items-start justify-between pb-3 border-b border-surface-container-high">
           <div>
             {title && (
-              <h2 id="modal-title" className="text-lg font-semibold text-neutral-100">
+              <h2 id="modal-title" className="text-lg font-semibold text-on-surface">
                 {title}
               </h2>
             )}
             {description && (
-              <p className="text-xs text-neutral-400 mt-0.5">{description}</p>
+              <p className="text-xs text-on-surface-variant mt-0.5">{description}</p>
             )}
           </div>
           <button
             type="button"
             onClick={onClose}
             aria-label="Fechar janela"
-            className="p-1 rounded-lg text-neutral-400 hover:text-white hover:bg-charcoal-800 transition-colors"
+            className="p-1 rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"
           >
             <X className="w-5 h-5" />
           </button>

@@ -2,7 +2,7 @@ import React from 'react';
 import { cn } from '../../lib/utils';
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
-  variant?: 'default' | 'sage' | 'outline' | 'subtle';
+  variant?: 'default' | 'sage' | 'outline' | 'subtle' | 'tertiary' | 'secondary';
 }
 
 export const Badge: React.FC<BadgeProps> = ({
@@ -12,16 +12,18 @@ export const Badge: React.FC<BadgeProps> = ({
   ...props
 }) => {
   const variants = {
-    default: 'bg-charcoal-800 text-neutral-300 border border-charcoal-700/60',
-    sage: 'bg-sage-950/80 text-sage-300 border border-sage-800/60',
-    outline: 'bg-transparent text-neutral-300 border border-charcoal-600',
-    subtle: 'bg-charcoal-850 text-neutral-400',
+    default: 'bg-surface-container-high text-on-surface border border-outline-variant/60',
+    sage: 'bg-primary-container/20 text-primary border border-primary/30',
+    tertiary: 'bg-tertiary-container/20 text-tertiary border border-tertiary/30',
+    secondary: 'bg-secondary-container/20 text-secondary border border-secondary/30',
+    outline: 'bg-transparent text-on-surface-variant border border-outline-variant',
+    subtle: 'bg-surface-container text-on-surface-variant',
   };
 
   return (
     <span
       className={cn(
-        'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
+        'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold',
         variants[variant],
         className
       )}
@@ -31,4 +33,3 @@ export const Badge: React.FC<BadgeProps> = ({
     </span>
   );
 };
-
