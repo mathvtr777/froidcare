@@ -173,3 +173,4 @@ export const WelcomingPage: React.FC = () => {
     </div>
   );
 };
+

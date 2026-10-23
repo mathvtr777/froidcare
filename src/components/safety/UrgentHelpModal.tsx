@@ -95,3 +95,4 @@ export const UrgentHelpModal: React.FC<UrgentHelpModalProps> = ({ isOpen, onClos
     </Modal>
   );
 };
+

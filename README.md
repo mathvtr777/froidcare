@@ -168,3 +168,4 @@ O projeto já contém o arquivo `vercel.json` configurado para SPA (Single Page 
 - **Exportação de Dados**: Na aba de Configurações, o usuário pode baixar todos os registros em JSON para portabilidade.
 - **Direito ao Esquecimento**: O usuário pode apagar todos os registros com um clique e confirmação destrutiva, bem como solicitar exclusão integral da conta.
 - **Sem Rastreamento Intrusivo**: Não há pixels de anúncios, ferramentas de biometria comportamental ou telemetria diagnóstica.
+

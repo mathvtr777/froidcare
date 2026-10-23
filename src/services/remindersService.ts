@@ -93,3 +93,4 @@ export const remindersService = {
     return Notification.permission;
   },
 };
+

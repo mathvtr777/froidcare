@@ -165,3 +165,4 @@ export const EMERGENCY_CONTACTS = [
     link: 'https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/s/saude-mental',
   },
 ];
+

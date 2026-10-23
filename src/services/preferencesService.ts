@@ -102,3 +102,4 @@ export const preferencesService = {
     return mockStorage.toggleFavorite(userId, activityId);
   },
 };
+

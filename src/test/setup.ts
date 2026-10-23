@@ -24,3 +24,4 @@ global.ResizeObserver = class ResizeObserver {
 
 // Polyfill scrollTo
 window.scrollTo = () => {};
+

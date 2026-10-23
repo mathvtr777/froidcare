@@ -32,3 +32,4 @@ export const supabase = clientInstance;
 export function isSupabaseReady(): boolean {
   return isConfigured && clientInstance !== null;
 }
+
