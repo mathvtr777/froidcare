@@ -36,15 +36,55 @@ export const BreathingExercise: React.FC<BreathingExerciseProps> = ({
   const modes = {
     square: {
       phases: [
-        { name: 'INSPIRE SUAVEMENTE', tip: 'Puxe o ar pelo nariz, sem pressa', duration: 4, scale: 'scale-125' },
-        { name: 'RETENHA O AR', tip: 'Mantenha o ar nos pulmões com serenidade', duration: 4, scale: 'scale-125' },
-        { name: 'EXPIRE LENTAMENTE', tip: 'Solte o ar suavemente pela boca', duration: 4, scale: 'scale-90' },
+        {
+          name: 'INSPIRE',
+          tip: 'Puxe o ar lentamente pelo nariz',
+          duration: 4,
+          scale: 1.6,
+          auraScale: 2.2,
+          color: 'from-cyan-400 to-teal-600',
+          shadow: 'rgba(45, 212, 191, 0.6)',
+        },
+        {
+          name: 'RETENHA O AR',
+          tip: 'Mantenha o ar nos pulmões com serenidade',
+          duration: 4,
+          scale: 1.6,
+          auraScale: 2.4,
+          color: 'from-teal-300 to-emerald-600',
+          shadow: 'rgba(52, 211, 153, 0.5)',
+        },
+        {
+          name: 'EXPIRE LENTAMENTE',
+          tip: 'Solte o ar suavemente pela boca',
+          duration: 4,
+          scale: 1,
+          auraScale: 1.2,
+          color: 'from-emerald-400 to-teal-700',
+          shadow: 'rgba(16, 185, 129, 0.4)',
+        },
       ],
     },
     gentle: {
       phases: [
-        { name: 'INSPIRE SUAVEMENTE', tip: 'Encha o peito de ar com calma', duration: 4, scale: 'scale-125' },
-        { name: 'EXPIRE PROFUNDAMENTE', tip: 'Esvazie devagar, liberando qualquer tensão', duration: 6, scale: 'scale-85' },
+        {
+          name: 'INSPIRE',
+          tip: 'Puxe o ar lentamente pelo nariz',
+          duration: 4,
+          scale: 1.6,
+          auraScale: 2.2,
+          color: 'from-cyan-400 to-teal-600',
+          shadow: 'rgba(45, 212, 191, 0.6)',
+        },
+        {
+          name: 'EXPIRE PROFUNDAMENTE',
+          tip: 'Solte o ar suavemente pela boca, liberando tensões',
+          duration: 6,
+          scale: 1,
+          auraScale: 1.2,
+          color: 'from-emerald-400 to-teal-700',
+          shadow: 'rgba(16, 185, 129, 0.4)',
+        },
       ],
     },
   };
@@ -114,7 +154,16 @@ export const BreathingExercise: React.FC<BreathingExerciseProps> = ({
   const secondsStr = String(remainingSeconds % 60).padStart(2, '0');
   const progressPercent = (elapsedSeconds / totalSeconds) * 100;
 
-  const currentScale = reducedMotion ? 'scale-100' : currentPhase.scale;
+  const currentScale = reducedMotion ? 1 : currentPhase.scale;
+  const currentAuraScale = reducedMotion ? 1.1 : currentPhase.auraScale;
+  const currentShadow = currentPhase.shadow;
+  const currentColor = currentPhase.color;
+
+  const transitionStyle: React.CSSProperties = {
+    transitionProperty: 'all',
+    transitionDuration: reducedMotion || !isRunning ? '0.5s' : `${currentPhase.duration}s`,
+    transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
+  };
 
   return (
     <div className="flex flex-col w-full pb-6 text-on-surface">
@@ -183,34 +232,88 @@ export const BreathingExercise: React.FC<BreathingExerciseProps> = ({
       </div>
 
       {/* Orbe Central Hipnótico e Respiração */}
-      <div className="relative flex flex-col items-center justify-center my-6 min-h-[320px] select-none">
-        {/* Aura de fundo bioluminescente */}
-        <div className="absolute w-72 h-72 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
-        <div className="absolute w-56 h-56 rounded-full bg-secondary-container/20 blur-2xl pointer-events-none" />
+      <div className="relative flex flex-col items-center justify-center my-6 min-h-[380px] select-none overflow-hidden rounded-3xl py-4">
+        {/* Background Glow Ambiente */}
+        <div
+          className="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none transition-all duration-1000"
+          style={{ transform: `scale(${currentScale * 1.5})` }}
+        >
+          <div
+            className="w-[500px] h-[500px] rounded-full blur-[150px] transition-colors duration-1000"
+            style={{ backgroundColor: currentShadow }}
+          />
+        </div>
 
-        {/* Anéis concêntricos */}
-        <div className="relative flex items-center justify-center w-64 h-64">
+        {/* Container da Esfera de Respiração */}
+        <div className="relative w-72 h-72 flex items-center justify-center mb-6">
+          {/* Ondas/Aura 3 (Mais externa) */}
           <div
-            className={`absolute w-64 h-64 rounded-full bg-primary/5 transition-transform duration-1000 ease-in-out ${currentScale}`}
+            className="absolute inset-0 rounded-full bg-teal-500/5 backdrop-blur-sm border border-teal-500/10"
+            style={{
+              ...transitionStyle,
+              transform: `scale(${currentAuraScale * 1.3})`,
+            }}
           />
+
+          {/* Ondas/Aura 2 */}
           <div
-            className={`absolute w-52 h-52 rounded-full bg-primary/10 transition-transform duration-1000 ease-in-out ${currentScale}`}
+            className="absolute inset-0 rounded-full bg-teal-500/10 border border-teal-400/20 shadow-[0_0_50px_rgba(45,212,191,0.1)]"
+            style={{
+              ...transitionStyle,
+              transform: `scale(${currentAuraScale * 1.1})`,
+            }}
           />
+
+          {/* Ondas/Aura 1 (Mais interna) */}
           <div
-            className={`absolute w-40 h-40 rounded-full bg-gradient-to-tr from-surface-container-highest via-primary-container/20 to-primary/30 backdrop-blur-md shadow-xl flex flex-col items-center justify-center transition-transform duration-1000 ease-in-out ${currentScale}`}
+            className="absolute inset-0 rounded-full bg-teal-500/20 border border-teal-300/30 shadow-[0_0_30px_rgba(45,212,191,0.2)]"
+            style={{
+              ...transitionStyle,
+              transform: `scale(${currentAuraScale * 0.9})`,
+            }}
+          />
+
+          {/* Esfera Principal (Orb) */}
+          <div
+            className={`relative flex items-center justify-center rounded-full bg-gradient-to-br ${currentColor} z-10`}
+            style={{
+              ...transitionStyle,
+              width: '140px',
+              height: '140px',
+              transform: `scale(${currentScale})`,
+              boxShadow: `
+                inset 0 10px 20px rgba(255,255,255,0.3), 
+                inset 0 -10px 20px rgba(0,0,0,0.3), 
+                0 10px 40px ${currentShadow}
+              `,
+            }}
           >
-            <span className="font-display-lg text-display-lg text-primary tracking-tight font-bold font-mono">
+            {/* Reflexo superior da esfera (Efeito Vidro/Glossy) */}
+            <div className="absolute top-2 left-1/2 -translate-x-1/2 w-3/4 h-1/3 bg-white/20 rounded-t-full blur-[2px]" />
+
+            {/* Número / Contador */}
+            <span
+              className="text-5xl font-medium text-white/90 drop-shadow-lg z-20 transition-all duration-300 font-mono"
+              style={{
+                transform: `scale(${1 / currentScale})`,
+              }}
+            >
               {cycleTimer}
             </span>
           </div>
         </div>
 
-        {/* Feedback e Guia da Fase */}
-        <div className="text-center mt-6 flex flex-col items-center max-w-xs">
-          <span className="font-label-sm text-label-sm uppercase tracking-widest text-primary font-semibold px-3 py-1 rounded-full bg-primary-container/15 mb-2 border border-primary/20">
-            {currentPhase.name}
-          </span>
-          <p className="font-body-md text-body-md text-on-surface-variant transition-opacity duration-300">
+        {/* Textos de Instrução e Controle */}
+        <div className="flex flex-col items-center justify-start w-full z-10">
+          {/* Badge no estilo da imagem */}
+          <div className="border border-teal-500/40 bg-teal-500/10 px-6 py-2.5 rounded-full mb-3 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.2)]">
+            <h2 className="text-sm font-bold tracking-[0.2em] text-teal-300 uppercase">
+              {currentPhase.name}
+            </h2>
+          </div>
+
+          {/* Texto descritivo */}
+          <p className="text-slate-300 text-sm sm:text-base font-light tracking-wide text-center max-w-xs">
             {currentPhase.tip}
           </p>
         </div>
