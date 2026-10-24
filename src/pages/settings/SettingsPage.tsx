@@ -210,7 +210,7 @@ export const SettingsPage: React.FC = () => {
             aria-checked={reducedMotion}
             onClick={handleToggleReducedMotion}
             className={`w-11 h-6 rounded-full transition-colors p-0.5 focus:outline-none shrink-0 ${
-              reducedMotion ? 'bg-primary' : 'bg-surface-variant'
+              reducedMotion ? 'bg-primary' : 'bg-surface-container-highest'
             }`}
           >
             <div

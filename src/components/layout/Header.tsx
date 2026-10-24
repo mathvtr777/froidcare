@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { Badge } from '../ui/Badge';
 import { Database } from 'lucide-react';
@@ -50,12 +51,14 @@ export const Header: React.FC<HeaderProps> = ({ onOpenHelp }) => {
             </span>
           </button>
 
-          <div
-            className="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant/60 flex items-center justify-center text-xs font-bold text-on-surface select-none shadow-sm"
-            title={`Conectado como ${displayName}`}
+          <Link
+            to="/configuracoes"
+            className="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant/60 flex items-center justify-center text-xs font-bold text-on-surface select-none shadow-sm hover:border-primary transition-colors"
+            title={`Conectado como ${displayName} (Abrir Configurações)`}
+            aria-label="Abrir Configurações"
           >
             {initial}
-          </div>
+          </Link>
         </div>
       </div>
     </header>

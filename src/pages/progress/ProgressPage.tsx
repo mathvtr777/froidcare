@@ -213,9 +213,15 @@ export const ProgressPage: React.FC = () => {
                   });
 
                   if (points.length === 1) {
+                    const cx = 170;
+                    const cy = points[0].y;
                     return (
                       <g>
-                        <circle cx={points[0].x} cy={points[0].y} fill="#5af0b3" r="6" />
+                        <line x1="30" y1={cy} x2="310" y2={cy} stroke="#5af0b3" strokeDasharray="4 4" strokeWidth="2" opacity="0.6" />
+                        <circle cx={cx} cy={cy} fill="#131b2e" r="7" stroke="#5af0b3" strokeWidth="3" />
+                        <text x={cx} y={cy - 12} fill="#5af0b3" fontSize="11" textAnchor="middle" fontWeight="bold">
+                          {timelineRecords[0].intensity}/10
+                        </text>
                       </g>
                     );
                   }

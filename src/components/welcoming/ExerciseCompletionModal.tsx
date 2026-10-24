@@ -27,16 +27,26 @@ export const ExerciseCompletionModal: React.FC<ExerciseCompletionModalProps> = (
   const [hasCompared, setHasCompared] = useState(false);
 
   const handleSavePostIntensity = async () => {
-    if (savedRecordId && user) {
+    if (user) {
       setSaving(true);
       try {
-        await recordsService.updateRecord(user.id, savedRecordId, {
-          intensity: initialIntensity ?? 4,
-          primary_emotion: 'alivio',
-          post_intensity: postIntensity,
-        });
+        if (savedRecordId) {
+          await recordsService.updateRecord(user.id, savedRecordId, {
+            intensity: initialIntensity ?? 4,
+            primary_emotion: 'alivio',
+            post_intensity: postIntensity,
+          });
+        } else {
+          await recordsService.createRecord(user.id, {
+            primary_emotion: 'alivio',
+            intensity: initialIntensity ?? 4,
+            post_intensity: postIntensity,
+            activity_used: activityName,
+            context: 'Prática de acolhimento concluída',
+          });
+        }
       } catch (err) {
-        console.warn('Erro ao atualizar intensidade posterior:', err);
+        console.warn('Erro ao registrar percepção pós-atividade:', err);
       } finally {
         setSaving(false);
       }
@@ -44,8 +54,26 @@ export const ExerciseCompletionModal: React.FC<ExerciseCompletionModalProps> = (
     setHasCompared(true);
   };
 
+  const handleSkip = async () => {
+    if (!savedRecordId && user) {
+      try {
+        await recordsService.createRecord(user.id, {
+          primary_emotion: 'calma',
+          intensity: initialIntensity ?? 3,
+          activity_used: activityName,
+          context: 'Prática de acolhimento concluída',
+        });
+      } catch (err) {
+        console.warn('Erro ao salvar prática:', err);
+      }
+    }
+    onClose();
+  };
+
   const getDescriptiveComparison = () => {
-    if (initialIntensity === undefined) return null;
+    if (initialIntensity === undefined) {
+      return `Você registrou uma percepção atual de nível ${postIntensity}/10. Fazer uma pausa e acolher este momento já é um passo valioso de autocuidado e autorregulação.`;
+    }
     if (postIntensity < initialIntensity) {
       return `Você registrou uma diminuição na intensidade percebida (de ${initialIntensity} para ${postIntensity}). Lembre-se de que cada momento tem seu próprio ritmo e variações são naturais.`;
     }
@@ -78,7 +106,7 @@ export const ExerciseCompletionModal: React.FC<ExerciseCompletionModalProps> = (
             />
 
             <div className="pt-3 flex items-center justify-between border-t border-outline-variant/40">
-              <Button variant="ghost" size="sm" onClick={onClose}>
+              <Button variant="ghost" size="sm" onClick={handleSkip}>
                 Pular registro
               </Button>
               <Button size="sm" onClick={handleSavePostIntensity} isLoading={saving} className="px-5">

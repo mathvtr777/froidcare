@@ -31,16 +31,16 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
       <div className="space-y-4">
         <div className="flex items-center gap-3">
           {isDestructive && (
-            <div className="p-2 rounded-xl bg-rose-950/60 border border-rose-900/50 text-rose-400 shrink-0">
+            <div className="p-2 rounded-xl bg-error-container/20 border border-error/40 text-error shrink-0">
               <AlertTriangle className="w-5 h-5" />
             </div>
           )}
-          <h3 className="text-base font-semibold text-neutral-100">{title}</h3>
+          <h3 className="text-base font-semibold text-on-surface">{title}</h3>
         </div>
 
-        <p className="text-sm text-neutral-300 leading-relaxed">{message}</p>
+        <p className="text-sm text-on-surface-variant leading-relaxed">{message}</p>
 
-        <div className="flex items-center justify-end gap-3 pt-3 border-t border-charcoal-800">
+        <div className="flex items-center justify-end gap-3 pt-3 border-t border-outline-variant/40">
           <Button variant="ghost" size="sm" onClick={onClose} disabled={isLoading}>
             {cancelLabel}
           </Button>

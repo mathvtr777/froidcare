@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { usePreferences } from '../../contexts/PreferencesContext';
+import { ambientAudioService } from '../../services/ambientAudioService';
 
 export interface BreathingExerciseProps {
   onFinish: (exerciseName: string) => void;
@@ -10,10 +11,10 @@ export interface BreathingExerciseProps {
 type BreathingMode = 'square' | 'gentle'; // 'square' (4-4-4) or 'gentle' (4-6)
 
 const SOUNDS = [
-  { name: 'Chuva Suave · 432Hz', icon: 'water_drop' },
-  { name: 'Sons da Floresta · Zen', icon: 'forest' },
-  { name: 'Ondas do Oceano', icon: 'waves' },
-  { name: 'Silêncio Puro', icon: 'volume_off' },
+  { name: 'Chuva Suave · 432Hz', icon: 'water_drop', id: 'rain' as const },
+  { name: 'Sons da Floresta · Zen', icon: 'forest', id: 'forest' as const },
+  { name: 'Ondas do Oceano', icon: 'waves', id: 'waves' as const },
+  { name: 'Silêncio Puro', icon: 'volume_off', id: 'silence' as const },
 ];
 
 export const BreathingExercise: React.FC<BreathingExerciseProps> = ({
@@ -29,7 +30,7 @@ export const BreathingExercise: React.FC<BreathingExerciseProps> = ({
   const [cycleTimer, setCycleTimer] = useState<number>(4);
   const [phaseIndex, setPhaseIndex] = useState<number>(0);
   const [soundIndex, setSoundIndex] = useState<number>(0);
-  const [isMuted, setIsMuted] = useState<boolean>(false);
+  const [isMuted, setIsMuted] = useState<boolean>(true); // Audio muted by default for safety
 
   const timerRef = useRef<number | null>(null);
 
@@ -93,6 +94,20 @@ export const BreathingExercise: React.FC<BreathingExerciseProps> = ({
   const currentPhase = activePhases[phaseIndex] || activePhases[0];
 
   useEffect(() => {
+    if (isRunning && !isMuted) {
+      ambientAudioService.setSound(SOUNDS[soundIndex].id, false);
+    } else {
+      ambientAudioService.stop();
+    }
+  }, [isRunning, isMuted, soundIndex]);
+
+  useEffect(() => {
+    return () => {
+      ambientAudioService.stop();
+    };
+  }, []);
+
+  useEffect(() => {
     if (!isRunning) {
       if (timerRef.current) clearInterval(timerRef.current);
       return;
@@ -101,7 +116,12 @@ export const BreathingExercise: React.FC<BreathingExerciseProps> = ({
     timerRef.current = window.setInterval(() => {
       setElapsedSeconds((prev) => {
         if (prev < totalSeconds) {
-          return prev + 1;
+          const next = prev + 1;
+          if (next >= totalSeconds) {
+            ambientAudioService.stop();
+            onFinish('Respiração Guiada');
+          }
+          return next;
         }
         return prev;
       });
@@ -126,7 +146,7 @@ export const BreathingExercise: React.FC<BreathingExerciseProps> = ({
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [isRunning, currentMode, phaseIndex, totalSeconds]);
+  }, [isRunning, currentMode, phaseIndex, totalSeconds, onFinish]);
 
   const togglePlay = () => {
     setIsRunning((prev) => !prev);
@@ -173,7 +193,10 @@ export const BreathingExercise: React.FC<BreathingExerciseProps> = ({
           <div className="flex items-center gap-1.5">
             <button
               type="button"
-              onClick={onExit}
+              onClick={() => {
+                ambientAudioService.stop();
+                onExit();
+              }}
               className="p-1 -ml-1 text-on-surface-variant hover:text-on-surface rounded-full transition-colors mr-1"
               aria-label="Voltar"
             >
@@ -395,7 +418,10 @@ export const BreathingExercise: React.FC<BreathingExerciseProps> = ({
         {/* Concluir */}
         <button
           type="button"
-          onClick={() => onFinish('Respiração Guiada')}
+          onClick={() => {
+            ambientAudioService.stop();
+            onFinish('Respiração Guiada');
+          }}
           className="flex-1 py-3 px-3 rounded-2xl bg-surface-container-low text-on-surface-variant hover:text-on-surface flex flex-col items-center justify-center gap-1 active:scale-95 transition-all border border-outline-variant/40"
         >
           <span className="material-symbols-outlined text-[20px]">check_circle</span>

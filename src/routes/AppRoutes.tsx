@@ -18,8 +18,11 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
 
   if (loading) {
     return (
-      <div className="h-screen w-screen bg-charcoal-950 flex items-center justify-center text-sm text-neutral-400">
-        Iniciando Froid Care...
+      <div className="h-screen w-screen bg-surface flex flex-col items-center justify-center text-sm text-on-surface-variant gap-3">
+        <div className="w-10 h-10 rounded-2xl bg-primary/15 border border-primary/30 flex items-center justify-center text-primary font-bold text-lg animate-pulse">
+          F
+        </div>
+        <span className="font-label-md text-label-md">Iniciando Froid Care...</span>
       </div>
     );
   }
@@ -36,8 +39,11 @@ const PublicRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
   if (loading) {
     return (
-      <div className="h-screen w-screen bg-charcoal-950 flex items-center justify-center text-sm text-neutral-400">
-        Carregando...
+      <div className="h-screen w-screen bg-surface flex flex-col items-center justify-center text-sm text-on-surface-variant gap-3">
+        <div className="w-10 h-10 rounded-2xl bg-primary/15 border border-primary/30 flex items-center justify-center text-primary font-bold text-lg animate-pulse">
+          F
+        </div>
+        <span className="font-label-md text-label-md">Carregando...</span>
       </div>
     );
   }

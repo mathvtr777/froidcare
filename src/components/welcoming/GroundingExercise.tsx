@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Button } from '../ui/Button';
 import { Eye, Hand, Ear, Wind, Coffee, ChevronRight, ChevronLeft, X } from 'lucide-react';
+import { useAuth } from '../../contexts/AuthContext';
+import { recordsService } from '../../services/recordsService';
 
 export interface GroundingExerciseProps {
-  onFinish: (name: string) => void;
+  onFinish: (name: string, savedRecordId?: string) => void;
   onExit: () => void;
 }
 
@@ -54,17 +56,42 @@ export const GroundingExercise: React.FC<GroundingExerciseProps> = ({
   onFinish,
   onExit,
 }) => {
+  const { user } = useAuth();
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [notesPerStep, setNotesPerStep] = useState<Record<number, string>>({});
+  const [isFinishing, setIsFinishing] = useState(false);
 
   const currentStep = STEPS[currentStepIndex];
   const Icon = currentStep.icon;
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (currentStepIndex < STEPS.length - 1) {
       setCurrentStepIndex((prev) => prev + 1);
     } else {
-      onFinish('Aterramento Sensorial (5-4-3-2-1)');
+      setIsFinishing(true);
+      const hasNotes = Object.values(notesPerStep).some((v) => v.trim().length > 0);
+      let recId: string | undefined;
+
+      if (hasNotes && user) {
+        try {
+          const formattedNotes = STEPS.map(
+            (step, idx) => `• ${step.title}\n${notesPerStep[idx] || '—'}`
+          ).join('\n\n');
+
+          const rec = await recordsService.createRecord(user.id, {
+            primary_emotion: 'calma',
+            intensity: 3,
+            activity_used: 'Aterramento Sensorial (5-4-3-2-1)',
+            notes: formattedNotes,
+            context: 'Exercício de presença somática 5-4-3-2-1',
+          });
+          recId = rec.id;
+        } catch (err) {
+          console.warn('Erro ao salvar aterramento:', err);
+        }
+      }
+      setIsFinishing(false);
+      onFinish('Aterramento Sensorial (5-4-3-2-1)', recId);
     }
   };
 
@@ -168,6 +195,7 @@ export const GroundingExercise: React.FC<GroundingExerciseProps> = ({
         <Button
           size="md"
           onClick={handleNext}
+          isLoading={isFinishing}
           className="px-6 font-semibold"
         >
           {currentStepIndex === STEPS.length - 1 ? (
